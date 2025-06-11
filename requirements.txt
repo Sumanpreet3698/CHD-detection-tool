@@ -1,0 +1,29 @@
+# requirements.txt
+
+# PDF, DOCX, PPTX, HTML, CSV, XLSX support
+pdfplumber
+PyMuPDF
+python-docx
+python-pptx
+beautifulsoup4
+lxml
+openpyxl
+pandas
+
+# Email, eBooks, ODF
+extract-msg
+ebooklib
+odfpy
+
+# OCR
+pytesseract
+Pillow
+
+# PII Detection
+presidio-analyzer
+presidio-anonymizer
+spacy
+
+# Utility
+regex
+tqdm
