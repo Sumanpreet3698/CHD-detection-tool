@@ -1,79 +1,10 @@
-2025-06-13 11:30:47,554 INFO Starting optimized full-scan on: C:\Users\nikit\OneDrive\
-2025-06-13 11:30:47,554 INFO Loaded checkpoint: 0 files done
-2025-06-13 11:30:48,962 INFO Starting batch 1: 500 files; batch_size=500
-2025-06-13 11:30:48,962 WARNING High memory usage: 95.82%.
-2025-06-13 11:30:48,962 INFO Reducing batch size from 500 to 250 due to memory pressure
-2025-06-13 11:31:39,637 WARNING Large file passed quick-scan: processing C:\Users\nikit\OneDrive\Downloads\Machine Learning - Computer Vision Intern - Assignment.zip (431613816 bytes)
-2025-06-13 11:31:47,247 WARNING Large file passed quick-scan: processing C:\Users\nikit\OneDrive\Downloads\Object-Detection-using-YOLOv5-and-OpenCV-DNN-in-CPP-and-Python.zip (122656015 bytes)
-2025-06-13 11:31:54,613 WARNING Large file passed quick-scan: processing C:\Users\nikit\OneDrive\Downloads\Machine Learning - Computer Vision Intern - Assignment\train2017.zip (421514742 bytes)
-2025-06-13 11:32:02,128 WARNING Large file passed quick-scan: processing C:\Users\nikit\OneDrive\Downloads\Machine Learning - Computer Vision Intern - Assignment\Machine Learning - Computer Vision Intern - Assignment\train2017.zip (421418942 bytes)
-2025-06-13 11:33:04,831 WARNING Failed to open XLSX C:\Users\nikit\OneDrive\Documents\R\win-library\4.1\readxl\extdata\clippy.xls: openpyxl does not support the old .xls file format, please use xlrd to read this file, or convert it to the more recent .xlsx file format.
-2025-06-13 11:33:04,885 WARNING Failed to open XLSX C:\Users\nikit\OneDrive\Documents\R\win-library\4.1\readxl\extdata\datasets.xls: openpyxl does not support the old .xls file format, please use xlrd to read this file, or convert it to the more recent .xlsx file format.
-2025-06-13 11:33:04,947 WARNING Failed to open XLSX C:\Users\nikit\OneDrive\Documents\R\win-library\4.1\readxl\extdata\deaths.xls: openpyxl does not support the old .xls file format, please use xlrd to read this file, or convert it to the more recent .xlsx file format.
-2025-06-13 11:33:05,085 WARNING Failed to open XLSX C:\Users\nikit\OneDrive\Documents\R\win-library\4.1\readxl\extdata\geometry.xls: openpyxl does not support the old .xls file format, please use xlrd to read this file, or convert it to the more recent .xlsx file format.
-2025-06-13 11:33:05,114 WARNING Failed to open XLSX C:\Users\nikit\OneDrive\Documents\R\win-library\4.1\readxl\extdata\type-me.xls: openpyxl does not support the old .xls file format, please use xlrd to read this file, or convert it to the more recent .xlsx file format.
-2025-06-13 11:33:18,962 INFO Completed batch 1. Total processed: 500
-2025-06-13 11:33:18,977 WARNING High memory usage: 81.16%.
-2025-06-13 11:33:18,977 INFO Reducing batch size from 250 to 125 due to memory pressure
-2025-06-13 11:33:19,089 INFO Starting batch 2: 500 files; batch_size=125
-2025-06-13 11:33:19,089 WARNING High memory usage: 81.34%.
-2025-06-13 11:33:19,089 INFO Reducing batch size from 125 to 100 due to memory pressure
-2025-06-13 11:34:21,385 INFO Completed batch 2. Total processed: 1000
-2025-06-13 11:34:21,411 INFO Starting batch 3: 500 files; batch_size=100
-2025-06-13 11:34:45,428 INFO Completed batch 3. Total processed: 1500
-2025-06-13 11:34:45,622 INFO Starting batch 4: 500 files; batch_size=100
-2025-06-13 11:35:32,747 WARNING High memory usage: 94.56%.
-2025-06-13 11:35:33,056 INFO Completed batch 4. Total processed: 2000
-2025-06-13 11:35:33,956 INFO Starting batch 5: 500 files; batch_size=100
-2025-06-13 11:37:20,106 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Accelerometer.csv
-2025-06-13 11:37:23,071 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter2_result.csv
-2025-06-13 11:38:20,160 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Gravity.csv
-2025-06-13 11:38:23,997 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter3_result_final.csv
-2025-06-13 11:39:20,264 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Gyroscope.csv
-2025-06-13 11:39:24,150 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter3_result_outliers.csv
-2025-06-13 11:40:24,633 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter4_result.csv
-2025-06-13 11:40:44,387 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Magnetometer.csv
-2025-06-13 11:41:25,166 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter5_result.csv
-2025-06-13 11:41:44,989 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\accelerometer_phone.csv
-2025-06-13 11:42:25,544 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter2_result.csv
-2025-06-13 11:42:45,120 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\accelerometer_smartwatch.csv
-2025-06-13 11:43:26,023 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter3_result_final.csv
-2025-06-13 11:43:47,710 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\gyroscope_phone.csv
-2025-06-13 11:44:27,748 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter3_result_outliers.csv
-2025-06-13 11:44:47,865 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\gyroscope_smartwatch.csv
-2025-06-13 11:45:28,523 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter4_result.csv
-2025-06-13 11:46:28,644 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter5_result.csv
-2025-06-13 11:46:52,530 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\magnetometer_phone.csv
-2025-06-13 11:47:52,896 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\magnetometer_smartwatch.csv
-2025-06-13 11:49:40,543 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\wlan_phone.csv
-2025-06-13 11:49:45,301 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\Literature_list.zip (139308271 bytes)
-2025-06-13 11:57:13,909 INFO Completed batch 5. Total processed: 2500
-2025-06-13 11:57:15,782 INFO Starting batch 6: 500 files; batch_size=100
-2025-06-13 11:57:15,790 WARNING High memory usage: 83.08%.
-2025-06-13 11:57:50,489 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\Literature_list.zip (139308271 bytes)
-2025-06-13 12:05:58,204 INFO Completed batch 6. Total processed: 3000
-2025-06-13 12:05:58,520 INFO Starting batch 7: 500 files; batch_size=100
-2025-06-13 12:10:43,221 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\worksheets\ansur\ANSUR II MALE Public.csv
-2025-06-13 12:11:39,465 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\Assignments\Assignment_2\Assigment2_Code.zip (364275586 bytes)
-2025-06-13 12:15:25,575 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\Assignments\Assignment_2\nti440_Assignment2.zip (365026385 bytes)
-2025-06-13 12:17:55,746 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Applied Text Mining\Assignments\Assignment3\SEM-2012-SharedTask-CD-SCO-training-simple.v2.txt
-2025-06-13 12:18:04,570 INFO Completed batch 7. Total processed: 3500
-2025-06-13 12:18:04,594 WARNING High memory usage: 87.50%.
-2025-06-13 12:18:04,749 INFO Starting batch 8: 349 files; batch_size=100
-2025-06-13 12:18:04,750 WARNING High memory usage: 87.57%.
-2025-06-13 12:20:42,819 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\An Introduction to Statistical Learning  with Applications in R.pdf
-2025-06-13 12:20:44,865 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Applied Text Mining\Assignments\Applied-text-mining-AI4\preprocessing-feature-extraction\data\SEM-2012-SharedTask-CD-SCO-training-simple.v2.txt
-2025-06-13 12:21:43,330 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\Deep Learning (2017, MIT).pdf
-2025-06-13 12:23:34,844 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\The Elements of Statistical Learning, Data Mining, Inference, and Prediction.pdf
-2025-06-13 12:23:46,387 WARNING Large file passed quick-scan: processing C:\Users\nikit\OneDrive\Desktop\alexnet\uploads_C\trx.csv (291427758 bytes)
-2025-06-13 12:24:46,787 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\alexnet\uploads_C\trx.csv
-2025-06-13 12:25:49,722 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\alexnet\uploads_B\trx.csv
-2025-06-13 12:26:01,969 INFO Completed batch 8. Total processed: 3849
-2025-06-13 12:26:01,986 INFO Full scan completed. Elapsed time: 3314.4s; processed 3849 files.
-2025-06-13 12:26:01,986 INFO Final checkpoint saved to: checkpoint_full_scan.pkl
-2025-06-13 14:03:59,428 INFO Starting optimized full-scan on: C:\Users\nikit\OneDrive\
-2025-06-13 14:03:59,431 INFO Exclude extensions: set()
-2025-06-13 14:03:59,431 INFO Presidio threshold: 0.5
-2025-06-13 14:03:59,436 INFO Loaded checkpoint: 3849 files done
-2025-06-13 14:04:03,088 INFO Starting batch 1: 500 files; batch_size=500
-2025-06-13 14:04:03,093 WARNING High memory usage: 87.03%.
+2025-06-13 16:47:21,435 INFO Starting optimized full-scan on: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\cc_scanner\sample_docs
+2025-06-13 16:47:21,435 INFO Exclude extensions: set()
+2025-06-13 16:47:21,435 INFO Presidio threshold: 0.6
+2025-06-13 16:47:21,435 INFO Loaded checkpoint: 0 files done
+2025-06-13 16:47:21,558 INFO Starting batch 1: 10 files; batch_size=500
+2025-06-13 16:47:21,563 WARNING High memory usage: 94.61%.
+2025-06-13 16:47:21,563 INFO Reducing batch size from 500 to 250 due to memory pressure
+2025-06-13 16:47:50,366 INFO Completed batch 1. Total processed: 10
+2025-06-13 16:47:50,373 INFO Full scan completed. Elapsed time: 29.0s; processed 10 files.
+2025-06-13 16:47:50,373 INFO Final checkpoint saved to: checkpoint_full_scan.pkl

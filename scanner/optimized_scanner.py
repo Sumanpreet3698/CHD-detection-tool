@@ -1,4 +1,4 @@
-# optimized_pipeline.py
+# optimized_scanner.py
 
 import os
 import sys
@@ -9,46 +9,32 @@ import gc
 import psutil
 import logging
 import re
+import argparse
 from datetime import datetime, timezone
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
-import argparse
 
 from config import EXTRACTORS
-from cc_detector import detect_credit_cards_default
+from cc_detector import detect_credit_cards_default  # use default recognizer
 
 # Configuration
 CHECKPOINT = "checkpoint_full_scan.pkl"
 REPORT = "scan_report_full.csv"
 
-# Estimate worker memory usage ~1GB; adjust based on profiling
+# Worker/memory settings (keep as before or adjust)
 total_mem_gb = psutil.virtual_memory().total / (1024**3)
 est_worker_mem_gb = 1.0
-max_workers = 2 # max(1, int(total_mem_gb / est_worker_mem_gb) - 1)
+max_workers = 2  # or dynamic based on total_mem_gb
 WORKERS = min(max_workers, cpu_count() - 1) if cpu_count() > 1 else 1
-
-# Initial batch size; may be adjusted dynamically
 INITIAL_BATCH_SIZE = 500
-
-# Restart worker after this many tasks to avoid memory bloat
 MAXTASKSPERCHILD = 100
-
-# If memory usage > this fraction, adjust batch size
 MEMORY_WARN_THRESHOLD = 0.8
-
-# File size thresholds
-MAX_EXTRACT_SIZE = 100 * 1024 * 1024  # 100 MB: above this, use quick-scan only or skip if no match
-
-# Per-file time threshold (seconds)
+MAX_EXTRACT_SIZE = 100 * 1024 * 1024  # 100MB
 MAX_TIME_PER_FILE = 60  # seconds
 
-# Optimized regex for faster prefiltering
-PREFILTER_REGEX = re.compile(rb"\b(?:\d{4}[- ]?){3}\d{4}\b")  # Matches 16-digit sequences with optional spaces or hyphens
-
-# Prioritize file extensions more likely to contain credit card numbers
+PREFILTER_REGEX = re.compile(rb"\b(?:\d{4}[- ]?){3}\d{4}\b")
 PRIORITY_EXTENSIONS = {".txt", ".csv", ".docx", ".pdf"}
 
-# Logging setup
 logging.basicConfig(
     filename="pipeline.log",
     filemode="a",
@@ -56,7 +42,6 @@ logging.basicConfig(
     level=logging.INFO,
 )
 logger = logging.getLogger(__name__)
-
 
 def gather_all_files_scandir(root, ext_set):
     stack = [root]
@@ -71,7 +56,7 @@ def gather_all_files_scandir(root, ext_set):
                         elif entry.is_file(follow_symlinks=False):
                             ext = os.path.splitext(entry.name)[1].lower()
                             if ext in PRIORITY_EXTENSIONS:
-                                yield entry.path  # Yield prioritized files first
+                                yield entry.path
                             elif ext in ext_set:
                                 yield entry.path
                     except Exception:
@@ -92,7 +77,7 @@ def batched_file_iterator(gen, batch_size, done_set=None):
         yield batch
 
 def init_worker():
-    import cc_detector  # preload spaCy
+    import cc_detector  # preload spaCy/Presidio
 
 def quick_scan_bytes(path, max_bytes=65536):
     try:
@@ -107,14 +92,16 @@ def quick_scan_bytes(path, max_bytes=65536):
                     data += tail
                 except Exception:
                     pass
-        if PREFILTER_REGEX.search(data):
-            return True
-        else:
-            return False
+        return bool(PREFILTER_REGEX.search(data))
     except Exception:
         return True
 
-def process_file_wrapper(path):
+def process_file_wrapper(args):
+    """
+    args: tuple(path, threshold)
+    Returns: (path, hits_list)
+    """
+    path, threshold = args
     start_time = time.time()
     hits = []
     try:
@@ -127,7 +114,7 @@ def process_file_wrapper(path):
     if not extractor:
         return (path, hits)
 
-    # Large file prefilter
+    # Prefilter large files by raw scan
     if size is not None and size > MAX_EXTRACT_SIZE:
         if not quick_scan_bytes(path):
             logger.info(f"Skipping large file (no CC-like pattern): {path} ({size} bytes)")
@@ -137,6 +124,9 @@ def process_file_wrapper(path):
 
     # Extraction & detection
     try:
+        # Optional: debug logging to confirm extraction
+        # segments = list(extractor(path))
+        # if not segments: logger.info(f"No text segments from {path}")
         for label, text in extractor(path):
             if not text or not text.strip():
                 continue
@@ -147,11 +137,11 @@ def process_file_wrapper(path):
                 if time.time() - start_time > MAX_TIME_PER_FILE:
                     logger.warning(f"Timeout processing file: {path}")
                     return (path, hits)
-                chunk = text[i : i + chunk_size]
+                chunk = text[i: i + chunk_size]
                 if not chunk.strip():
                     continue
-                # Detect
-                results = detect_credit_cards_default(chunk, score_threshold=0.8)
+                # Detect using default Presidio recognizer, with threshold
+                results = detect_credit_cards_default(chunk, score_threshold=threshold)
                 for r in results:
                     start_idx, end_idx = i + r.start, i + r.end
                     snippet = chunk[r.start:r.end].strip().replace("\n", " ")
@@ -183,7 +173,6 @@ def monitor_memory_and_adjust(batch_size):
     used_frac = mem.used / mem.total
     if used_frac > MEMORY_WARN_THRESHOLD:
         logger.warning(f"High memory usage: {used_frac:.2%}.")
-        # reduce batch size for next iteration
         new_size = max(100, batch_size // 2)
         if new_size < batch_size:
             logger.info(f"Reducing batch size from {batch_size} to {new_size} due to memory pressure")
@@ -194,14 +183,15 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Optimized Credit Card Detection Scanner")
     parser.add_argument("scan_root", type=str, help="Root directory to scan")
     parser.add_argument("--no-checkpoint", action="store_true", help="Disable checkpointing")
-    parser.add_argument("--exclude", type=str, nargs="*", default=None, help="File extensions to exclude (e.g., .png .jpg)")
-    parser.add_argument("--threshold", type=float, default=0.6, help="Presidio score threshold (0 to 1)")
+    parser.add_argument("--exclude", type=str, nargs="*", default=None,
+                        help="File extensions to exclude (e.g., .png .jpg)")
+    parser.add_argument("--threshold", type=float, default=0.6,
+                        help="Presidio score threshold (0 to 1); default 0.6")
     return parser.parse_args()
 
 def main():
-    start_time_total = time.time()  # Track the total elapsed time
+    start_time_total = time.time()
     args = parse_arguments()
-
     scan_root = args.scan_root
     use_checkpoint = not args.no_checkpoint
     exclude_exts = set(args.exclude) if args.exclude else set()
@@ -230,34 +220,30 @@ def main():
     batch_num = 0
     current_batch_size = INITIAL_BATCH_SIZE
 
-    # For dynamic chunksize in imap_unordered:
-    def compute_chunksize(batch_len):
-        # Aim for ~4 tasks per worker at a time
-        if WORKERS > 0:
-            return max(1, batch_len // (WORKERS * 4))
-        else:
-            return 1
-
-    # Add tqdm for progress tracking
+    # Count total files for progress bar
     total_files = sum(1 for _ in gather_all_files_scandir(scan_root, extensions))
     with tqdm(total=total_files, desc="Scanning files") as pbar:
         for batch in batched_file_iterator(file_gen, current_batch_size, done if use_checkpoint else None):
             batch_num += 1
             logger.info(f"Starting batch {batch_num}: {len(batch)} files; batch_size={current_batch_size}")
-            # Memory check & adjust batch size for next batch
             current_batch_size = monitor_memory_and_adjust(current_batch_size)
 
-            # Process batch with Pool
+            # Build args: each item is (path, threshold)
+            args_iter = ((path, threshold) for path in batch)
             with Pool(processes=WORKERS, initializer=init_worker, maxtasksperchild=MAXTASKSPERCHILD) as pool:
-                chunksize = compute_chunksize(len(batch))
-                for result in pool.imap_unordered(process_file_wrapper, batch, chunksize):
+                chunksize = max(1, len(batch) // (WORKERS * 4)) if WORKERS > 0 else 1
+                for path, hits in pool.imap_unordered(process_file_wrapper, args_iter, chunksize):
+                    # Write hits if any
+                    timestamp = datetime.now(timezone.utc).isoformat()
+                    for hit in hits:
+                        writer.writerow([timestamp, *hit])
                     processed_count += 1
                     pbar.update(1)
 
-            # End of pool context: workers cleaned up
             gc.collect()
             logger.info(f"Completed batch {batch_num}. Total processed: {processed_count}")
             if use_checkpoint:
+                done.update(batch)
                 save_checkpoint(done)
 
     report_file.close()
