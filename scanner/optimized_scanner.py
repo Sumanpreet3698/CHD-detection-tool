@@ -12,6 +12,7 @@ import re
 from datetime import datetime, timezone
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
+import argparse
 
 from config import EXTRACTORS
 from cc_detector import detect_credit_cards_default
@@ -41,8 +42,11 @@ MAX_EXTRACT_SIZE = 100 * 1024 * 1024  # 100 MB: above this, use quick-scan only 
 # Per-file time threshold (seconds)
 MAX_TIME_PER_FILE = 60  # seconds
 
-# For plain-text prefilter: regex to detect digit sequences of length 12–19
-PREFILTER_REGEX = re.compile(rb"(?:\d[ -]?){12,19}")
+# Optimized regex for faster prefiltering
+PREFILTER_REGEX = re.compile(rb"\b(?:\d{4}[- ]?){3}\d{4}\b")  # Matches 16-digit sequences with optional spaces or hyphens
+
+# Prioritize file extensions more likely to contain credit card numbers
+PRIORITY_EXTENSIONS = {".txt", ".csv", ".docx", ".pdf"}
 
 # Logging setup
 logging.basicConfig(
@@ -66,7 +70,9 @@ def gather_all_files_scandir(root, ext_set):
                             stack.append(entry.path)
                         elif entry.is_file(follow_symlinks=False):
                             ext = os.path.splitext(entry.name)[1].lower()
-                            if ext in ext_set:
+                            if ext in PRIORITY_EXTENSIONS:
+                                yield entry.path  # Yield prioritized files first
+                            elif ext in ext_set:
                                 yield entry.path
                     except Exception:
                         continue
@@ -145,7 +151,7 @@ def process_file_wrapper(path):
                 if not chunk.strip():
                     continue
                 # Detect
-                results = detect_credit_cards_default(chunk, score_threshold=0.1)
+                results = detect_credit_cards_default(chunk, score_threshold=0.8)
                 for r in results:
                     start_idx, end_idx = i + r.start, i + r.end
                     snippet = chunk[r.start:r.end].strip().replace("\n", " ")
@@ -184,17 +190,28 @@ def monitor_memory_and_adjust(batch_size):
         return new_size
     return batch_size
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Optimized Credit Card Detection Scanner")
+    parser.add_argument("scan_root", type=str, help="Root directory to scan")
+    parser.add_argument("--no-checkpoint", action="store_true", help="Disable checkpointing")
+    parser.add_argument("--exclude", type=str, nargs="*", default=None, help="File extensions to exclude (e.g., .png .jpg)")
+    parser.add_argument("--threshold", type=float, default=0.6, help="Presidio score threshold (0 to 1)")
+    return parser.parse_args()
+
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python optimized_pipeline.py <scan_root> [--no-checkpoint]")
-        sys.exit(1)
-    scan_root = sys.argv[1]
-    use_checkpoint = "--no-checkpoint" not in sys.argv
+    start_time_total = time.time()  # Track the total elapsed time
+    args = parse_arguments()
+
+    scan_root = args.scan_root
+    use_checkpoint = not args.no_checkpoint
+    exclude_exts = set(args.exclude) if args.exclude else set()
+    threshold = args.threshold
 
     logger.info(f"Starting optimized full-scan on: {scan_root}")
-    start_time_total = time.time()
+    logger.info(f"Exclude extensions: {exclude_exts}")
+    logger.info(f"Presidio threshold: {threshold}")
 
-    extensions = set(EXTRACTORS.keys())
+    extensions = set(EXTRACTORS.keys()) - exclude_exts
     file_gen = gather_all_files_scandir(scan_root, extensions)
 
     done = set()
@@ -207,7 +224,7 @@ def main():
     report_file = open(REPORT, "a", newline="", encoding="utf-8")
     writer = csv.writer(report_file)
     if write_header:
-        writer.writerow(["timestamp","file","label","start","end","match"])
+        writer.writerow(["timestamp", "file", "label", "start", "end", "match"])
 
     processed_count = 0
     batch_num = 0
@@ -221,35 +238,27 @@ def main():
         else:
             return 1
 
-    for batch in batched_file_iterator(file_gen, current_batch_size, done if use_checkpoint else None):
-        batch_num += 1
-        logger.info(f"Starting batch {batch_num}: {len(batch)} files; batch_size={current_batch_size}")
-        # Memory check & adjust batch size for next batch
-        current_batch_size = monitor_memory_and_adjust(current_batch_size)
+    # Add tqdm for progress tracking
+    total_files = sum(1 for _ in gather_all_files_scandir(scan_root, extensions))
+    with tqdm(total=total_files, desc="Scanning files") as pbar:
+        for batch in batched_file_iterator(file_gen, current_batch_size, done if use_checkpoint else None):
+            batch_num += 1
+            logger.info(f"Starting batch {batch_num}: {len(batch)} files; batch_size={current_batch_size}")
+            # Memory check & adjust batch size for next batch
+            current_batch_size = monitor_memory_and_adjust(current_batch_size)
 
-        # Process batch with Pool
-        with Pool(processes=WORKERS, initializer=init_worker, maxtasksperchild=MAXTASKSPERCHILD) as pool:
-            chunksize = compute_chunksize(len(batch))
-            # Use imap_unordered for streaming results
-            for path, hits in tqdm(pool.imap_unordered(process_file_wrapper, batch, chunksize=chunksize),
-                                    total=len(batch), desc=f"Batch {batch_num}"):
-                timestamp = datetime.now(timezone.utc).isoformat()
-                for hit in hits:
-                    writer.writerow([timestamp, *hit])
-                processed_count += 1
-                if use_checkpoint:
-                    done.add(path)
-                # Periodic checkpoint & memory check
-                if processed_count % 1000 == 0:
-                    save_checkpoint(done)
-                    current_batch_size = monitor_memory_and_adjust(current_batch_size)
-        # End of pool context: workers cleaned up
-        gc.collect()
-        logger.info(f"Completed batch {batch_num}. Total processed: {processed_count}")
-        if use_checkpoint:
-            save_checkpoint(done)
-        # Check memory again
-        current_batch_size = monitor_memory_and_adjust(current_batch_size)
+            # Process batch with Pool
+            with Pool(processes=WORKERS, initializer=init_worker, maxtasksperchild=MAXTASKSPERCHILD) as pool:
+                chunksize = compute_chunksize(len(batch))
+                for result in pool.imap_unordered(process_file_wrapper, batch, chunksize):
+                    processed_count += 1
+                    pbar.update(1)
+
+            # End of pool context: workers cleaned up
+            gc.collect()
+            logger.info(f"Completed batch {batch_num}. Total processed: {processed_count}")
+            if use_checkpoint:
+                save_checkpoint(done)
 
     report_file.close()
     elapsed_total = time.time() - start_time_total

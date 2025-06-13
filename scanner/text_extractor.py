@@ -11,8 +11,8 @@ from ebooklib import epub
 from odf import text, teletype
 from odf.opendocument import load as load_odf
 import extract_msg
-# import pytesseract
-# from PIL import Image, UnidentifiedImageError
+from PIL import Image, UnidentifiedImageError
+import pytesseract
 import zipfile
 import warnings
 
@@ -29,6 +29,90 @@ import sys, contextlib
 import logging
 
 logger = logging.getLogger(__name__)
+
+# In text_extractor.py
+import xlrd
+import time
+
+def extract_text_from_xls(path):
+    """
+    Extract text from old-style Excel .xls files via xlrd.
+    Yields (label, text) where label indicates sheet name.
+    Reads rows in streaming fashion, grouping rows into chunks to avoid
+    building a huge string at once.
+    """
+    # Optional: start time if you want per-file timeouts
+    start_time = time.time()
+    try:
+        # on_demand=True may reduce memory footprint for large files
+        wb = xlrd.open_workbook(path, on_demand=True, formatting_info=False)
+    except Exception as e:
+        logger.warning(f"Failed to open .xls file {path} with xlrd: {e}")
+        return
+
+    try:
+        # Iterate sheets
+        for sheet in wb.sheets():
+            sheet_name = sheet.name or "Sheet"
+            # Stream rows in chunks, e.g., 500 rows per chunk
+            chunk_size = 500
+            buffer = []
+            rows_processed = 0
+            nrows = sheet.nrows
+            for row_idx in range(nrows):
+                # Optional time check: abort if too slow
+                if time.time() - start_time > 60:  # e.g. 60s timeout
+                    logger.warning(f"Timeout reading .xls {path} sheet {sheet_name}")
+                    # Yield whatever is in buffer so far, then return
+                    if buffer:
+                        text_chunk = "\n".join(buffer)
+                        if text_chunk.strip():
+                            yield f"XLS:{sheet_name}", text_chunk
+                    return
+
+                try:
+                    row = sheet.row(row_idx)
+                except Exception as e:
+                    logger.debug(f"Skipping row {row_idx} in {path} sheet {sheet_name}: {e}")
+                    continue
+
+                cells = []
+                for cell in row:
+                    try:
+                        val = cell.value
+                        # cell.ctype can be used to format types, but str(val) is usually okay
+                        if val is not None and str(val).strip() != "":
+                            cells.append(str(val))
+                    except Exception:
+                        continue
+                if cells:
+                    buffer.append(" ".join(cells))
+                rows_processed += 1
+
+                if rows_processed >= chunk_size:
+                    text_chunk = "\n".join(buffer)
+                    buffer = []
+                    rows_processed = 0
+                    if text_chunk.strip():
+                        yield f"XLS:{sheet_name}", text_chunk
+
+            # After all rows, yield leftover
+            if buffer:
+                text_chunk = "\n".join(buffer)
+                if text_chunk.strip():
+                    yield f"XLS:{sheet_name}", text_chunk
+
+    except Exception as e:
+        logger.warning(f"Error iterating .xls {path}: {e}", exc_info=True)
+    finally:
+        try:
+            # xlrd’s Book object doesn't have a close method in older versions,
+            # but on_demand=True releases cached data when sheets are closed.
+            # If available, you can call wb.release_resources():
+            if hasattr(wb, "release_resources"):
+                wb.release_resources()
+        except Exception:
+            pass
 
 @contextlib.contextmanager
 def suppress_stderr():
@@ -219,45 +303,33 @@ def extract_text_from_csv(path):
     Stream rows for CSV: read via csv.reader line-by-line.
     Yield chunks of N rows joined.
     """
+    chunk_size = 1000  # Process 1000 rows at a time
     try:
         with open(path, newline='', encoding="utf-8", errors="ignore") as f:
             reader = csv.reader(f)
             buffer = []
-            rows_read = 0
             for row in reader:
-                # Join cells
-                try:
-                    line = " ".join(str(cell) for cell in row if cell is not None)
-                except Exception:
-                    # fallback join
-                    parts = []
-                    for cell in row:
-                        try:
-                            parts.append(str(cell))
-                        except Exception:
-                            continue
-                    line = " ".join(parts)
-                buffer.append(line)
-                rows_read += 1
-                if rows_read >= 500:
+                buffer.append(", ".join(row))
+                if len(buffer) >= chunk_size:
                     text_chunk = "\n".join(buffer)
                     buffer = []
-                    rows_read = 0
                     if text_chunk.strip():
                         yield "CSV_chunk", text_chunk
+            # Yield any remaining rows in the buffer
             if buffer:
                 text_chunk = "\n".join(buffer)
                 if text_chunk.strip():
                     yield "CSV_chunk", text_chunk
-    except Exception:
-        # Fallback raw
+    except Exception as e:
+        logger.warning(f"Error reading CSV {path}: {e}")
+        # Fallback: read raw if streaming fails
         try:
-            with open(path, encoding="utf-8", errors="ignore") as f2:
-                text = f2.read(65536)
-            if text.strip():
-                yield "CSV_fallback", text
-        except Exception:
-            return
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                content = f.read()
+                if content.strip():
+                    yield "CSV_raw", content
+        except Exception as fallback_e:
+            logger.error(f"Fallback failed for CSV {path}: {fallback_e}")
 
 def extract_text_from_txt(path):
     """
@@ -359,25 +431,25 @@ def extract_text_from_msg(path):
     except Exception:
         pass
 
-# def extract_text_from_image(path):
-#     """
-#     OCR via pytesseract. Skip if PIL cannot open or tesseract fails.
-#     """
-#     try:
-#         img = Image.open(path)
-#     except (UnidentifiedImageError, Exception):
-#         return
-#     try:
-#         text = pytesseract.image_to_string(img)
-#         if text and text.strip():
-#             yield "OCR image", text
-#     except Exception:
-#         return
-#     finally:
-#         try:
-#             img.close()
-#         except Exception:
-#             pass
+def extract_text_from_image(path):
+    """
+    OCR via pytesseract. Skip if PIL cannot open or tesseract fails.
+    """
+    try:
+        img = Image.open(path)
+    except (UnidentifiedImageError, Exception):
+        return
+    try:
+        text = pytesseract.image_to_string(img)
+        if text and text.strip():
+            yield "OCR image", text
+    except Exception:
+        return
+    finally:
+        try:
+            img.close()
+        except Exception:
+            pass
 
 def extract_text_from_zip(path):
     """
@@ -408,3 +480,15 @@ def extract_text_from_zip(path):
                 return
     except Exception:
         return
+
+def fallback_raw_text_extraction(path):
+    """
+    Fallback method to extract raw text from any file type.
+    """
+    try:
+        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+            content = f.read()
+            if content.strip():
+                yield "RAW", content
+    except Exception as e:
+        logger.error(f"Fallback raw text extraction failed for {path}: {e}")
