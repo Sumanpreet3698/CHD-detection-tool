@@ -24,6 +24,9 @@ presidio-analyzer
 presidio-anonymizer
 spacy
 
+# python -m spacy download en_core_web_lg
+
 # Utility
 regex
 tqdm
+psutil
