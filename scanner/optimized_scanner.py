@@ -9,7 +9,7 @@ import gc
 import psutil
 import logging
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 
@@ -233,7 +233,7 @@ def main():
             # Use imap_unordered for streaming results
             for path, hits in tqdm(pool.imap_unordered(process_file_wrapper, batch, chunksize=chunksize),
                                     total=len(batch), desc=f"Batch {batch_num}"):
-                timestamp = datetime.utcnow().isoformat()
+                timestamp = datetime.now(timezone.utc).isoformat()
                 for hit in hits:
                     writer.writerow([timestamp, *hit])
                 processed_count += 1
