@@ -1,0 +1,103 @@
+2025-06-13 21:23:51,416 INFO Starting custom scan on: C:\Users\nikit\OneDrive\
+2025-06-13 21:23:51,417 INFO Exclude extensions: set()
+2025-06-13 21:23:51,417 INFO base_threshold=0.1, final_threshold=0.5, w_context=0.7, w_pattern=0.3, window_size=100
+2025-06-13 21:23:51,417 INFO Workers=2, initial batch_size=500, max_time_per_file=60
+2025-06-13 21:23:51,418 INFO Loaded checkpoint: 0 files already done
+2025-06-13 21:23:58,233 INFO Starting batch 1: 500 files; batch_size=500
+2025-06-13 21:23:58,239 WARNING High memory usage: 94.54%.
+2025-06-13 21:23:58,240 INFO Reducing batch size from 500 to 250 due to memory pressure
+2025-06-13 21:26:22,107 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Downloads\Machine Learning - Computer Vision Intern - Assignment.zip (431613816 bytes)
+2025-06-13 21:26:22,827 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Downloads\Object-Detection-using-YOLOv5-and-OpenCV-DNN-in-CPP-and-Python.zip (122656015 bytes)
+2025-06-13 21:26:36,550 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Downloads\Machine Learning - Computer Vision Intern - Assignment\train2017.zip (421514742 bytes)
+2025-06-13 21:27:55,463 INFO Completed batch 1. Total processed so far: 500
+2025-06-13 21:27:55,505 INFO Starting batch 2: 500 files; batch_size=250
+2025-06-13 21:29:57,044 INFO Completed batch 2. Total processed so far: 1000
+2025-06-13 21:29:57,103 INFO Starting batch 3: 500 files; batch_size=250
+2025-06-13 21:31:40,284 INFO Completed batch 3. Total processed so far: 1500
+2025-06-13 21:31:40,324 INFO Starting batch 4: 500 files; batch_size=250
+2025-06-13 21:33:18,545 INFO Completed batch 4. Total processed so far: 2000
+2025-06-13 21:33:18,585 INFO Starting batch 5: 500 files; batch_size=250
+2025-06-13 21:34:47,732 INFO Completed batch 5. Total processed so far: 2500
+2025-06-13 21:34:47,942 INFO Starting batch 6: 500 files; batch_size=250
+2025-06-13 21:35:54,734 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Downloads\Machine Learning - Computer Vision Intern - Assignment\Machine Learning - Computer Vision Intern - Assignment\train2017.zip (421418942 bytes)
+2025-06-13 21:36:18,683 INFO Completed batch 6. Total processed so far: 3000
+2025-06-13 21:36:18,741 INFO Starting batch 7: 500 files; batch_size=250
+2025-06-13 21:37:45,959 INFO Completed batch 7. Total processed so far: 3500
+2025-06-13 21:37:46,014 INFO Starting batch 8: 500 files; batch_size=250
+2025-06-13 21:39:23,950 INFO Completed batch 8. Total processed so far: 4000
+2025-06-13 21:39:23,960 INFO Starting batch 9: 500 files; batch_size=250
+2025-06-13 21:40:50,401 INFO Completed batch 9. Total processed so far: 4500
+2025-06-13 21:40:50,457 INFO Starting batch 10: 500 files; batch_size=250
+2025-06-13 21:42:19,844 INFO Completed batch 10. Total processed so far: 5000
+2025-06-13 21:42:20,022 INFO Starting batch 11: 500 files; batch_size=250
+2025-06-13 21:44:19,067 INFO Completed batch 11. Total processed so far: 5500
+2025-06-13 21:44:19,551 INFO Starting batch 12: 500 files; batch_size=250
+2025-06-13 21:47:03,706 INFO Completed batch 12. Total processed so far: 6000
+2025-06-13 21:47:03,720 INFO Starting batch 13: 500 files; batch_size=250
+2025-06-13 21:47:35,507 INFO Completed batch 13. Total processed so far: 6500
+2025-06-13 21:47:35,519 INFO Starting batch 14: 500 files; batch_size=250
+2025-06-13 21:48:08,918 INFO Completed batch 14. Total processed so far: 7000
+2025-06-13 21:48:09,365 INFO Starting batch 15: 500 files; batch_size=250
+2025-06-13 21:50:29,226 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter2_result.csv
+2025-06-13 21:51:31,617 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter3_result_final.csv
+2025-06-13 21:52:03,800 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Magnetometer.csv
+2025-06-13 21:52:33,251 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter3_result_outliers.csv
+2025-06-13 21:53:34,028 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter4_result.csv
+2025-06-13 21:54:34,193 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter5_result.csv
+2025-06-13 21:55:34,343 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter2_result.csv
+2025-06-13 21:56:34,918 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter3_result_final.csv
+2025-06-13 21:57:35,907 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter3_result_outliers.csv
+2025-06-13 21:58:36,426 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter4_result.csv
+2025-06-13 21:59:37,447 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter5_result.csv
+2025-06-13 22:00:53,822 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Accelerometer.csv
+2025-06-13 22:01:54,304 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Gravity.csv
+2025-06-13 22:02:54,587 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Gyroscope.csv
+2025-06-13 22:02:55,837 INFO Completed batch 15. Total processed so far: 7500
+2025-06-13 22:02:56,791 INFO Starting batch 16: 500 files; batch_size=250
+2025-06-13 22:02:56,807 WARNING High memory usage: 81.07%.
+2025-06-13 22:02:56,807 INFO Reducing batch size from 250 to 125 due to memory pressure
+2025-06-13 22:04:14,556 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\accelerometer_phone.csv
+2025-06-13 22:05:17,832 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\accelerometer_smartwatch.csv
+2025-06-13 22:06:26,001 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\gyroscope_phone.csv
+2025-06-13 22:07:26,925 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\gyroscope_smartwatch.csv
+2025-06-13 22:08:56,490 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\light_phone.csv
+2025-06-13 22:10:00,425 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\magnetometer_phone.csv
+2025-06-13 22:10:49,034 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\my_code\navigation_robot_code\interaction_20230614103939.csv
+2025-06-13 22:11:01,540 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\magnetometer_smartwatch.csv
+2025-06-13 22:12:03,422 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\pressure_phone.csv
+2025-06-13 22:13:05,707 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\wlan_phone.csv
+2025-06-13 22:13:13,563 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\Literature_list.zip (139308271 bytes)
+2025-06-13 22:14:19,389 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\merged_interaction_file_updated(AutoRecovered).csv
+2025-06-13 22:15:19,494 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\merged_interaction_file_updated.csv
+2025-06-13 22:19:25,748 INFO Completed batch 16. Total processed so far: 8000
+2025-06-13 22:19:26,482 INFO Starting batch 17: 500 files; batch_size=125
+2025-06-13 22:19:56,543 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\Literature_list.zip (139308271 bytes)
+2025-06-13 22:21:08,911 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\merged_interaction_file_updated(AutoRecovered).csv
+2025-06-13 22:22:09,004 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\merged_interaction_file_updated.csv
+2025-06-13 22:27:39,227 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\my_code\navigation_robot_code\interaction_20230614104111.csv
+2025-06-13 22:30:43,777 INFO Completed batch 17. Total processed so far: 8500
+2025-06-13 22:30:44,178 INFO Starting batch 18: 500 files; batch_size=125
+2025-06-13 22:32:30,738 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\Assignments\Assignment_3\nti440_ada275_jbn708_assignment_3b.zip
+2025-06-13 22:32:58,018 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\Assignments\Assignment_2\Assigment2_Code.zip (364275586 bytes)
+2025-06-13 22:33:00,420 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\Assignments\Assignment_2\nti440_Assignment2.zip (365026385 bytes)
+2025-06-13 22:33:37,231 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\RLbook2020.pdf
+2025-06-13 22:35:18,871 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\worksheets\ansur\ANSUR II FEMALE Public.csv
+2025-06-13 22:35:53,912 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Applied Text Mining\Assignments\Assignment3\SEM-2012-SharedTask-CD-SCO-training-simple.v2.txt
+2025-06-13 22:36:22,307 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\worksheets\ansur\ANSUR II MALE Public.csv
+2025-06-13 22:37:15,884 INFO Completed batch 18. Total processed so far: 9000
+2025-06-13 22:37:16,104 INFO Starting batch 19: 500 files; batch_size=125
+2025-06-13 22:37:16,118 WARNING High memory usage: 81.45%.
+2025-06-13 22:37:16,119 INFO Reducing batch size from 125 to 100 due to memory pressure
+2025-06-13 22:40:34,324 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Applied Text Mining\Assignments\Applied-text-mining-AI4\preprocessing-feature-extraction\data\SEM-2012-SharedTask-CD-SCO-training-simple.v2.txt
+2025-06-13 22:40:37,394 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\An Introduction to Statistical Learning  with Applications in R.pdf
+2025-06-13 22:41:37,991 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\Deep Learning (2017, MIT).pdf
+2025-06-13 22:43:33,183 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\The Elements of Statistical Learning, Data Mining, Inference, and Prediction.pdf
+2025-06-13 22:45:32,689 INFO Completed batch 19. Total processed so far: 9500
+2025-06-13 22:45:32,821 INFO Starting batch 20: 23 files; batch_size=100
+2025-06-13 22:45:56,288 WARNING Large file passed quick-scan: processing C:\Users\nikit\OneDrive\Desktop\alexnet\uploads_C\trx.csv (291427758 bytes)
+2025-06-13 22:46:57,343 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\alexnet\uploads_C\trx.csv
+2025-06-13 22:47:18,687 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\alexnet\uploads_C\clients.csv
+2025-06-13 22:48:06,201 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\alexnet\uploads_B\trx.csv
+2025-06-13 22:48:07,176 INFO Completed batch 20. Total processed so far: 9523
+2025-06-13 22:48:07,189 INFO Custom scan completed. Elapsed time: 5055.9s; processed 9523 files.
+2025-06-13 22:48:07,189 INFO Final checkpoint saved to: checkpoint_custom_scan.pkl

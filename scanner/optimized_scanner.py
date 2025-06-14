@@ -15,7 +15,7 @@ from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 
 from config import EXTRACTORS
-from cc_detector import detect_credit_cards_default  # use default recognizer
+from cc_detector import detect_credit_cards_default, detect_credit_cards_custom  # use default recognizer
 
 # Configuration
 CHECKPOINT = "checkpoint_full_scan.pkl"
