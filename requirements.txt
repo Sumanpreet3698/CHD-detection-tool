@@ -1,4 +1,6 @@
 # requirements.txt
+streamlit
+xlrd
 
 # PDF, DOCX, PPTX, HTML, CSV, XLSX support
 pdfplumber
@@ -30,3 +32,4 @@ spacy
 regex
 tqdm
 psutil
+
