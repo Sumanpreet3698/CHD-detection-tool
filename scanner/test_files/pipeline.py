@@ -4,8 +4,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 
 from . import quick_scan
-from .cc_detector import detect_credit_cards
-from . import config
+from ..cc_detector import detect_credit_cards
+from .. import config
 
 WHITELIST = set(config.EXTRACTORS.keys())
 MAX_SIZE = 500 * 1024 * 1024
