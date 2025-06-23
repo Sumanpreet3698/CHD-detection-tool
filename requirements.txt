@@ -20,7 +20,9 @@ pytesseract
 Pillow
 
 # PII Detection
-presidio-analyzer
+# Extra "[transformers]" includes the necessary dependencies for the
+# `TransformersNlpEngine` class used in `scanner/cc_detector.py`.
+presidio-analyzer[transformers]>=2.2
 presidio-anonymizer
 spacy
 
@@ -30,3 +32,10 @@ spacy
 regex
 tqdm
 psutil
+
+# Added from the code block
+transformers
+torch
+
+pandas
+streamlit

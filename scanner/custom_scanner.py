@@ -35,7 +35,10 @@ from tqdm import tqdm
 
 # Import your modules; ensure PYTHONPATH includes the directory containing these files.
 from config import EXTRACTORS
-from cc_detector import detect_credit_cards_custom
+from cc_detector import (
+    detect_credit_cards_custom,
+    detect_credit_cards_transformer,
+)
 
 # ------ Configuration defaults ------
 CHECKPOINT = "checkpoint_custom_scan.pkl"
@@ -129,7 +132,7 @@ def init_worker():
     Initializer for worker processes.
     Importing cc_detector ensures spaCy/Presidio engine is loaded once per worker.
     """
-    import cc_detector  # noqa: F401
+    import cc_detector  # Preload cc_detector within each worker
 
 
 def quick_scan_bytes(path, max_bytes=65536):
@@ -159,11 +162,20 @@ def quick_scan_bytes(path, max_bytes=65536):
 def process_file_wrapper(args):
     """
     Worker function for processing one file.
-    args: tuple(path, base_threshold, final_threshold, w_context, w_pattern, window_size)
+    args: tuple(path, base_threshold, final_threshold, w_context, w_pattern, window_size, engine_type, transformer_model)
     Returns: (path, hits_list), where hits_list is list of tuples:
       (path, label, start, end, match_text, base_score, context_score, final_score)
     """
-    path, base_threshold, final_threshold, w_context, w_pattern, window_size = args
+    (
+        path,
+        base_threshold,
+        final_threshold,
+        w_context,
+        w_pattern,
+        window_size,
+        engine_type,
+        transformer_model,
+    ) = args
     start_time = time.time()
     hits = []
 
@@ -206,15 +218,36 @@ def process_file_wrapper(args):
                 if not chunk.strip():
                     continue
 
-                # Call custom detector
-                detections = detect_credit_cards_custom(
-                    chunk,
-                    base_threshold=base_threshold,
-                    final_threshold=final_threshold,
-                    w_context=w_context,
-                    w_pattern=w_pattern,
-                    window_size=window_size,
-                )
+                # Choose detection logic based on engine_type
+                if engine_type == "transformer":
+                    raw_results = detect_credit_cards_transformer(
+                        chunk,
+                        score_threshold=final_threshold,  # reuse threshold
+                        model_name=transformer_model,
+                    )
+                    # Convert AnalyzerResult objects to the tuple format expected downstream
+                    detections = []
+                    for r in raw_results:
+                        detections.append(
+                            {
+                                "start": r.start,
+                                "end": r.end,
+                                "entity_type": r.entity_type,
+                                "match": chunk[r.start : r.end],
+                                "base_score": r.score,
+                                "context_score": None,
+                                "final_score": r.score,
+                            }
+                        )
+                else:
+                    detections = detect_credit_cards_custom(
+                        chunk,
+                        base_threshold=base_threshold,
+                        final_threshold=final_threshold,
+                        w_context=w_context,
+                        w_pattern=w_pattern,
+                        window_size=window_size,
+                    )
                 for det in detections:
                     # Adjust indices by offset
                     start_idx = det["start"] + (offset - len(chunk))
@@ -312,6 +345,18 @@ def parse_arguments():
         "--max-time-per-file", type=int, default=MAX_TIME_PER_FILE,
         help=f"Max seconds per file before timing out. Default={MAX_TIME_PER_FILE}"
     )
+    parser.add_argument(
+        "--nlp-engine",
+        choices=["spacy", "transformer"],
+        default="spacy",
+        help="Choose underlying NLP engine for Presidio (default: spacy)",
+    )
+    parser.add_argument(
+        "--transformer-model",
+        type=str,
+        default="bert-base-cased",
+        help="HuggingFace model identifier for transformer engine",
+    )
     return parser.parse_args()
 
 
@@ -328,6 +373,8 @@ def main():
     window_size = args.window_size
     batch_size = args.batch_size
     max_time_per_file = args.max_time_per_file
+    engine_type = args.nlp_engine
+    transformer_model = args.transformer_model
 
     global MAX_TIME_PER_FILE
     MAX_TIME_PER_FILE = max_time_per_file
@@ -377,9 +424,18 @@ def main():
             # Monitor/adjust memory
             batch_size = monitor_memory_and_adjust(batch_size)
 
-            # Build args for worker: (path, base_threshold, final_threshold, w_context, w_pattern, window_size)
+            # Build args for worker: (path, base_threshold, final_threshold, w_context, w_pattern, window_size, engine_type, transformer_model)
             args_iter = (
-                (path, base_threshold, final_threshold, w_context, w_pattern, window_size)
+                (
+                    path,
+                    base_threshold,
+                    final_threshold,
+                    w_context,
+                    w_pattern,
+                    window_size,
+                    engine_type,
+                    transformer_model,
+                )
                 for path in batch
             )
             with Pool(processes=WORKERS, initializer=init_worker, maxtasksperchild=MAXTASKSPERCHILD) as pool:

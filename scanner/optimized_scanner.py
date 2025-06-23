@@ -15,7 +15,10 @@ from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 
 from config import EXTRACTORS
-from cc_detector import detect_credit_cards_default, detect_credit_cards_custom  # use default recognizer
+from cc_detector import (
+    detect_credit_cards_default,
+    detect_credit_cards_transformer,
+)
 
 # Configuration
 CHECKPOINT = "checkpoint_full_scan.pkl"
@@ -32,8 +35,14 @@ MEMORY_WARN_THRESHOLD = 0.8
 MAX_EXTRACT_SIZE = 100 * 1024 * 1024  # 100MB
 MAX_TIME_PER_FILE = 60  # seconds
 
-PREFILTER_REGEX = re.compile(rb"\b(?:\d{4}[- ]?){3}\d{4}\b")
+# PREFILTER_REGEX = re.compile(rb"\b(?:\d{4}[- ]?){3}\d{4}\b")
 PRIORITY_EXTENSIONS = {".txt", ".csv", ".docx", ".pdf"}
+
+# Define which extensions are plain-text and safe for full-file raw scan
+TEXT_PREFILTER_EXTS = {".txt", ".log", ".csv", ".json", ".xml", ".ini", ".cfg", ".bak", ".tmp"}
+
+# Byte-level regex for prefilter (compiled once)
+PREFILTER_REGEX = re.compile(rb"(?:\d[ -]?){12,19}")
 
 logging.basicConfig(
     filename="pipeline.log",
@@ -77,7 +86,7 @@ def batched_file_iterator(gen, batch_size, done_set=None):
         yield batch
 
 def init_worker():
-    import cc_detector  # preload spaCy/Presidio
+    import cc_detector  # Preload spaCy/Presidio engine
 
 def quick_scan_bytes(path, max_bytes=65536):
     try:
@@ -96,58 +105,151 @@ def quick_scan_bytes(path, max_bytes=65536):
     except Exception:
         return True
 
+# def process_file_wrapper(args):
+#     """
+#     args: tuple(path, threshold)
+#     Returns: (path, hits_list)
+#     """
+#     path, threshold = args
+#     start_time = time.time()
+#     hits = []
+#     try:
+#         size = os.path.getsize(path)
+#     except Exception:
+#         size = None
+
+#     ext = os.path.splitext(path)[1].lower()
+#     extractor = EXTRACTORS.get(ext)
+#     if not extractor:
+#         return (path, hits)
+
+#     # Prefilter large files by raw scan
+#     if size is not None and size > MAX_EXTRACT_SIZE:
+#         if not quick_scan_bytes(path):
+#             logger.info(f"Skipping large file (no CC-like pattern): {path} ({size} bytes)")
+#             return (path, hits)
+#         else:
+#             logger.warning(f"Large file passed quick-scan: processing {path} ({size} bytes)")
+
+#     # Extraction & detection
+#     try:
+#         # Optional: debug logging to confirm extraction
+#         # segments = list(extractor(path))
+#         # if not segments: logger.info(f"No text segments from {path}")
+#         for label, text in extractor(path):
+#             if not text or not text.strip():
+#                 continue
+#             length = len(text)
+#             chunk_size = 50_000
+#             for i in range(0, length, chunk_size):
+#                 # Time check
+#                 if time.time() - start_time > MAX_TIME_PER_FILE:
+#                     logger.warning(f"Timeout processing file: {path}")
+#                     return (path, hits)
+#                 chunk = text[i: i + chunk_size]
+#                 if not chunk.strip():
+#                     continue
+#                 # Detect using default Presidio recognizer, with threshold
+#                 results = detect_credit_cards_default(chunk, score_threshold=threshold)
+#                 for r in results:
+#                     start_idx, end_idx = i + r.start, i + r.end
+#                     snippet = chunk[r.start:r.end].strip().replace("\n", " ")
+#                     hits.append((path, label, start_idx, end_idx, snippet))
+#     except Exception as e:
+#         logger.error(f"Error extracting {path}: {e}", exc_info=True)
+#         return (path, hits)
+
+#     return (path, hits)
+
+def full_file_prefilter(path, regex=PREFILTER_REGEX, chunk_size=1024*1024):
+    """
+    Stream entire file, scanning for credit-card-like byte sequences.
+    Return True if pattern found (so proceed to extraction/detection), False to skip.
+    """
+    overlap = 19
+    prev = b""
+    try:
+        with open(path, "rb") as f:
+            while True:
+                chunk = f.read(chunk_size)
+                if not chunk:
+                    break
+                data = prev + chunk
+                if regex.search(data):
+                    return True
+                if len(data) > overlap:
+                    prev = data[-overlap:]
+                else:
+                    prev = data
+        return False
+    except Exception:
+        return True  # on error, do not skip
+
 def process_file_wrapper(args):
     """
-    args: tuple(path, threshold)
+    Worker wrapper.
+
+    args: tuple(path, threshold, engine_type, transformer_model)
     Returns: (path, hits_list)
     """
-    path, threshold = args
-    start_time = time.time()
+    path, threshold, engine_type, transformer_model = args
     hits = []
+    start_time = time.time()
     try:
         size = os.path.getsize(path)
     except Exception:
         size = None
-
-    ext = os.path.splitext(path)[1].lower()
+    _, ext = os.path.splitext(path)
+    ext = ext.lower()
     extractor = EXTRACTORS.get(ext)
     if not extractor:
         return (path, hits)
 
-    # Prefilter large files by raw scan
-    if size is not None and size > MAX_EXTRACT_SIZE:
-        if not quick_scan_bytes(path):
-            logger.info(f"Skipping large file (no CC-like pattern): {path} ({size} bytes)")
+    # 1) Prefilter logic
+    if ext in TEXT_PREFILTER_EXTS:
+        # full-file raw scan
+        ok = full_file_prefilter(path)
+        if not ok:
+            logger.info(f"Skipping plain-text file (no CC-like pattern) {path}")
             return (path, hits)
-        else:
-            logger.warning(f"Large file passed quick-scan: processing {path} ({size} bytes)")
+        # For text files, extraction is just reading entire file (extractor should handle it)
+    else:
+        # For non-text extensions, optional head/tail quick scan only if large
+        if size is not None and size > MAX_EXTRACT_SIZE:
+            ok = quick_scan_bytes(path)
+            if not ok:
+                logger.info(f"Skipping large binary file (no CC-like head/tail) {path}")
+                return (path, hits)
+        # Proceed to structured extraction for binary/encoded formats
 
-    # Extraction & detection
+    # 2) Extraction & detection as before
     try:
-        # Optional: debug logging to confirm extraction
-        # segments = list(extractor(path))
-        # if not segments: logger.info(f"No text segments from {path}")
         for label, text in extractor(path):
             if not text or not text.strip():
                 continue
             length = len(text)
-            chunk_size = 50_000
-            for i in range(0, length, chunk_size):
-                # Time check
+            chunk_size = 50000
+            for offset in range(0, length, chunk_size):
                 if time.time() - start_time > MAX_TIME_PER_FILE:
                     logger.warning(f"Timeout processing file: {path}")
                     return (path, hits)
-                chunk = text[i: i + chunk_size]
+                chunk = text[offset: offset + chunk_size]
                 if not chunk.strip():
                     continue
-                # Detect using default Presidio recognizer, with threshold
-                results = detect_credit_cards_default(chunk, score_threshold=threshold)
+                if engine_type == "transformer":
+                    results = detect_credit_cards_transformer(
+                        chunk,
+                        score_threshold=threshold,
+                        model_name=transformer_model,
+                    )
+                else:
+                    results = detect_credit_cards_default(chunk, score_threshold=threshold)
                 for r in results:
-                    start_idx, end_idx = i + r.start, i + r.end
+                    start_idx, end_idx = offset + r.start, offset + r.end
                     snippet = chunk[r.start:r.end].strip().replace("\n", " ")
                     hits.append((path, label, start_idx, end_idx, snippet))
     except Exception as e:
-        logger.error(f"Error extracting {path}: {e}", exc_info=True)
+        logger.error(f"Error extracting/detecting in {path}: {e}", exc_info=True)
         return (path, hits)
 
     return (path, hits)
@@ -185,8 +287,24 @@ def parse_arguments():
     parser.add_argument("--no-checkpoint", action="store_true", help="Disable checkpointing")
     parser.add_argument("--exclude", type=str, nargs="*", default=None,
                         help="File extensions to exclude (e.g., .png .jpg)")
-    parser.add_argument("--threshold", type=float, default=0.6,
-                        help="Presidio score threshold (0 to 1); default 0.6")
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=0.6,
+        help="Presidio score threshold (0 to 1); default 0.6",
+    )
+    parser.add_argument(
+        "--nlp-engine",
+        choices=["spacy", "transformer"],
+        default="spacy",
+        help="Choose underlying NLP engine for Presidio (default: spacy)",
+    )
+    parser.add_argument(
+        "--transformer-model",
+        type=str,
+        default="bert-base-cased",
+        help="HuggingFace model identifier to use when --nlp-engine=transformer",
+    )
     return parser.parse_args()
 
 def main():
@@ -196,10 +314,14 @@ def main():
     use_checkpoint = not args.no_checkpoint
     exclude_exts = set(args.exclude) if args.exclude else set()
     threshold = args.threshold
+    engine_type = args.nlp_engine
+    transformer_model = args.transformer_model
 
     logger.info(f"Starting optimized full-scan on: {scan_root}")
     logger.info(f"Exclude extensions: {exclude_exts}")
     logger.info(f"Presidio threshold: {threshold}")
+    logger.info(f"NLP engine: {engine_type}")
+    logger.info(f"Transformer model: {transformer_model}")
 
     extensions = set(EXTRACTORS.keys()) - exclude_exts
     file_gen = gather_all_files_scandir(scan_root, extensions)
@@ -228,8 +350,10 @@ def main():
             logger.info(f"Starting batch {batch_num}: {len(batch)} files; batch_size={current_batch_size}")
             current_batch_size = monitor_memory_and_adjust(current_batch_size)
 
-            # Build args: each item is (path, threshold)
-            args_iter = ((path, threshold) for path in batch)
+            # Build args: each item is (path, threshold, engine_type, transformer_model)
+            args_iter = (
+                (path, threshold, engine_type, transformer_model) for path in batch
+            )
             with Pool(processes=WORKERS, initializer=init_worker, maxtasksperchild=MAXTASKSPERCHILD) as pool:
                 chunksize = max(1, len(batch) // (WORKERS * 4)) if WORKERS > 0 else 1
                 for path, hits in pool.imap_unordered(process_file_wrapper, args_iter, chunksize):

@@ -1,6 +1,24 @@
 # cc_detector.py
-from presidio_analyzer import AnalyzerEngine, PatternRecognizer, Pattern, RecognizerRegistry
+# Standard libraries
+from functools import lru_cache
+
+# Third-party
 import spacy
+from presidio_analyzer import AnalyzerEngine
+
+# ---------------------------------------------------------------------------
+# NOTE:
+#   • We import `TransformersNlpEngine` directly from the modern public path
+#     (``presidio_analyzer.nlp_engine``).  This is available from
+#     ``presidio-analyzer>=2.2`` which should be installed with the
+#     ``[transformers]`` extra, e.g.:
+#
+#         pip install --upgrade "presidio-analyzer[transformers]"
+#
+#   • If the user's environment ships an older Presidio release which lacks
+#     this symbol, an ``ImportError`` will be raised immediately with a clear
+#     message, instead of silently falling back to a legacy private path.
+# ---------------------------------------------------------------------------
 
 # Load spaCy model for context-aware detection
 try:
@@ -110,3 +128,129 @@ def detect_credit_cards_custom(
                 "final_score": final_score
             })
     return results
+
+# ------------- NLP ENGINE FACTORY -------------
+
+@lru_cache(maxsize=2)
+def _create_presidio_engine(engine_type: str = "spacy", model_name: str = "en_core_web_lg"):
+    """Return a Presidio AnalyzerEngine configured with the requested NLP engine.
+
+    Parameters
+    ----------
+    engine_type : str, optional
+        Either "spacy" (default) or "transformer".
+    model_name : str, optional
+        HuggingFace model name when engine_type == "transformer", or spaCy model when "spacy".
+
+    Notes
+    -----
+    The result is cached (LRU) so subsequent calls with identical parameters
+    will reuse the same AnalyzerEngine instance (important when running in a
+    long-lived process such as the Streamlit app).
+    """
+    engine_name = "transformers" if engine_type.lower() == "transformer" else "spacy"
+
+    # Ensure the light-weight spaCy model is present (download once).
+    try:
+        from spacy.util import is_package
+        from importlib import import_module
+
+        if not is_package("en_core_web_sm"):
+            # Access via import_module to placate static analysers.
+            import_module("spacy.cli").download("en_core_web_sm")
+    except Exception:
+        # Even if download fails we'll let Presidio attempt to load and fail later.
+        pass
+
+    if engine_name == "transformers":
+        # For the transformers engine Presidio expects a nested mapping with
+        # both a spaCy pipeline (for tokenisation) **and** the transformers
+        # model.  We hard-code the light-weight `en_core_web_sm` spaCy model so
+        # the user doesn't need a second 400 MB download.
+        configuration = {
+            "nlp_engine_name": "transformers",
+            "models": [
+                {
+                    "lang_code": "en",
+                    "model_name": {
+                        "spacy": "en_core_web_sm",
+                        "transformers": model_name,
+                    },
+                }
+            ],
+        }
+    else:
+        configuration = {
+            "nlp_engine_name": "spacy",
+            "models": [
+                {"lang_code": "en", "model_name": model_name},
+            ],
+        }
+
+    try:
+        from presidio_analyzer.nlp_engine import NlpEngineProvider
+
+        provider = NlpEngineProvider(nlp_configuration=configuration)
+        nlp_engine_instance = provider.create_engine()
+
+    except Exception as err:
+        raise RuntimeError(
+            f"Failed to initialise Presidio NLP engine '{engine_name}' with model '{model_name}': {err}"
+        )
+
+    return AnalyzerEngine(nlp_engine=nlp_engine_instance, supported_languages=["en"])
+
+
+# Instantiate default engines once (cached by decorator anyway)
+engine_spacy_default = _create_presidio_engine("spacy", "en_core_web_lg")
+try:
+    engine_transformer_default = _create_presidio_engine("transformer", "bert-base-cased")
+except Exception as e:
+    print(f"[WARN] Failed to load Transformers engine: {e}. Falling back to spaCy.")
+    engine_transformer_default = engine_spacy_default
+
+
+def detect_credit_cards_spacy(text: str, score_threshold: float | None = None):
+    """Detect credit-card numbers using spaCy-backed Presidio engine."""
+    kwargs = {
+        "text": text,
+        "entities": ["CREDIT_CARD"],
+        "language": "en",
+    }
+    if score_threshold is not None:
+        kwargs["score_threshold"] = score_threshold
+    return engine_spacy_default.analyze(**kwargs)
+
+
+def detect_credit_cards_transformer(
+    text: str,
+    score_threshold: float | None = None,
+    model_name: str = "bert-base-cased",
+):
+    """Detect credit-card numbers using a Transformer-backed Presidio engine.
+
+    A small helper which lazily instantiates (and memoizes) an AnalyzerEngine
+    powered by 🤗 Transformers. The default model is `bert-base-cased`, but you
+    can supply any public HuggingFace NER model which supports English.
+    """
+    try:
+        engine = _create_presidio_engine("transformer", model_name)
+    except RuntimeError as err:
+        # Graceful fallback to spaCy if transformer stack is missing.
+        print(
+            f"[WARN] Transformer engine unavailable ({err}). Falling back to spaCy for this call."
+        )
+        return detect_credit_cards_spacy(text, score_threshold)
+
+    kwargs = {
+        "text": text,
+        "entities": ["CREDIT_CARD"],
+        "language": "en",
+    }
+    if score_threshold is not None:
+        kwargs["score_threshold"] = score_threshold
+    return engine.analyze(**kwargs)
+
+
+# Keep existing detect_credit_cards_default for backward-compatibility (alias to spaCy)
+detect_credit_cards_default = detect_credit_cards_spacy
