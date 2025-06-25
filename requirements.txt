@@ -39,3 +39,6 @@ torch
 
 pandas
 streamlit
+
+# Added from the code block
+paramiko

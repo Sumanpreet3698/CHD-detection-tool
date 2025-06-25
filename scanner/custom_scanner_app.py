@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import csv
 from multiprocessing import Pool
+# from remote_scanner import remote_scan
 
 from datetime import datetime, timezone
 from custom_scanner import (
@@ -77,21 +78,9 @@ with st.sidebar:
         help="Characters around match to consider for context"
     )
     
-    # Model selection
-    engine_type = st.radio(
-        "NLP engine",
-        options=["spacy", "transformer"],
-        index=0,
-        help="Underlying NLP engine used by Presidio for entity detection",
-    )
-
-    transformer_model = None
-    if engine_type == "transformer":
-        transformer_model = st.text_input(
-            "Transformer model (🤗 HuggingFace)",
-            value="bert-base-cased",
-            help="Model identifier to load when using transformer engine",
-        )
+    # Force engine to spacy for lightweight local testing
+    engine_type = "spacy"
+    transformer_model = None  # Not used in spacy mode
 
     # Advanced settings
     with st.expander("Advanced Settings"):
@@ -125,11 +114,28 @@ with st.sidebar:
             help="Save progress to resume interrupted scans"
         )
 
-# Main input
-folder_path = st.text_input("📁 Enter folder path to scan:", placeholder="C:/path/to/folder")
+    # For now, only Local scan mode is enabled
+    scan_mode = "Local"
+
+# Main input – differ for local vs. remote
+if True:  # Local scan only
+    folder_path = st.text_input(
+        "📁 Enter local folder path to scan:",
+        placeholder="C:/path/to/folder",
+    )
+    # Dummy placeholders so remote variables exist (typed to satisfy linters)
+    host: str = ""
+    port: int = 22
+    username: str = ""
+    password: str | None = ""
+    key_path: str | None = None
+    remote_dir: str = ""
 
 if st.button("🚀 Start Scan", type="primary"):
-    if not os.path.exists(folder_path) or not os.path.isdir(folder_path):
+    # ------------------------------------------------------------
+    # LOCAL SCAN MODE (existing logic, unchanged)
+    # ------------------------------------------------------------
+    if not folder_path or not os.path.exists(folder_path) or not os.path.isdir(folder_path):
         st.error("❌ Please enter a valid directory path.")
     else:
         # Initialize scanning
@@ -256,8 +262,8 @@ if st.button("🚀 Start Scan", type="primary"):
             
             # Summary metrics
             col1, col2, col3 = st.columns(3)
-            col1.metric("Total matches", len(df))
-            col2.metric("Files with matches", df['file'].nunique())
+            col1.metric("Total matches", int(len(df)))
+            col2.metric("Files with matches", int(df['file'].nunique()))
             col3.metric("Avg. confidence", f"{df['final_score'].mean():.1%}")
             
             # Style function for highlighting

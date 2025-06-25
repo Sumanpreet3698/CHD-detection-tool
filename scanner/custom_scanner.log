@@ -1,0 +1,162 @@
+2025-06-25 10:36:42,193 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\new_fastapi.zip
+2025-06-25 10:44:08,381 INFO nlp_engine not provided, creating default.
+2025-06-25 10:44:16,697 INFO Created NLP engine: spacy. Loaded models: ['en']
+2025-06-25 10:44:16,710 INFO registry not provided, creating default.
+2025-06-25 10:44:16,778 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:16,880 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:16,880 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:16,881 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:16,882 INFO Loaded recognizer: UsBankRecognizer
+2025-06-25 10:44:16,883 INFO Loaded recognizer: UsLicenseRecognizer
+2025-06-25 10:44:16,883 INFO Loaded recognizer: UsItinRecognizer
+2025-06-25 10:44:16,884 INFO Loaded recognizer: UsPassportRecognizer
+2025-06-25 10:44:16,886 INFO Loaded recognizer: UsSsnRecognizer
+2025-06-25 10:44:16,888 INFO Loaded recognizer: NhsRecognizer
+2025-06-25 10:44:16,889 INFO Loaded recognizer: UkNinoRecognizer
+2025-06-25 10:44:16,890 INFO Loaded recognizer: SgFinRecognizer
+2025-06-25 10:44:16,890 INFO Loaded recognizer: AuAbnRecognizer
+2025-06-25 10:44:16,891 INFO Loaded recognizer: AuAcnRecognizer
+2025-06-25 10:44:16,892 INFO Loaded recognizer: AuTfnRecognizer
+2025-06-25 10:44:16,892 INFO Loaded recognizer: AuMedicareRecognizer
+2025-06-25 10:44:16,892 INFO Loaded recognizer: InPanRecognizer
+2025-06-25 10:44:16,894 INFO Loaded recognizer: InAadhaarRecognizer
+2025-06-25 10:44:16,896 INFO Loaded recognizer: InVehicleRegistrationRecognizer
+2025-06-25 10:44:16,897 INFO Loaded recognizer: InPassportRecognizer
+2025-06-25 10:44:16,897 INFO Loaded recognizer: EsNifRecognizer
+2025-06-25 10:44:16,899 INFO Loaded recognizer: EsNieRecognizer
+2025-06-25 10:44:16,899 INFO Loaded recognizer: ItDriverLicenseRecognizer
+2025-06-25 10:44:16,900 INFO Loaded recognizer: ItFiscalCodeRecognizer
+2025-06-25 10:44:16,900 INFO Loaded recognizer: ItVatCodeRecognizer
+2025-06-25 10:44:16,901 INFO Loaded recognizer: ItIdentityCardRecognizer
+2025-06-25 10:44:16,904 INFO Loaded recognizer: ItPassportRecognizer
+2025-06-25 10:44:16,905 INFO Loaded recognizer: PlPeselRecognizer
+2025-06-25 10:44:16,907 INFO Loaded recognizer: CryptoRecognizer
+2025-06-25 10:44:16,907 INFO Loaded recognizer: DateRecognizer
+2025-06-25 10:44:16,908 INFO Loaded recognizer: EmailRecognizer
+2025-06-25 10:44:16,908 INFO Loaded recognizer: IbanRecognizer
+2025-06-25 10:44:16,909 INFO Loaded recognizer: IpRecognizer
+2025-06-25 10:44:16,909 INFO Loaded recognizer: MedicalLicenseRecognizer
+2025-06-25 10:44:16,909 INFO Loaded recognizer: PhoneRecognizer
+2025-06-25 10:44:16,910 INFO Loaded recognizer: UrlRecognizer
+2025-06-25 10:44:16,910 INFO Loaded recognizer: InVoterRecognizer
+2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: pl, registry supported languages: en
+2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - EsNifRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - EsNieRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItDriverLicenseRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItFiscalCodeRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItVatCodeRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItIdentityCardRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItPassportRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - PlPeselRecognizer supported languages: pl, registry supported languages: en
+2025-06-25 10:44:16,915 INFO Loaded recognizer: SpacyRecognizer
+2025-06-25 10:44:17,358 WARNING model_to_presidio_entity_mapping is missing from configuration, using default
+2025-06-25 10:44:17,358 WARNING low_score_entity_names is missing from configuration, using default
+2025-06-25 10:44:17,358 WARNING labels_to_ignore is missing from configuration, using default
+2025-06-25 10:44:22,789 INFO Created NLP engine: spacy. Loaded models: ['en']
+2025-06-25 10:44:22,790 INFO registry not provided, creating default.
+2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:22,812 INFO Loaded recognizer: UsBankRecognizer
+2025-06-25 10:44:22,813 INFO Loaded recognizer: UsLicenseRecognizer
+2025-06-25 10:44:22,813 INFO Loaded recognizer: UsItinRecognizer
+2025-06-25 10:44:22,813 INFO Loaded recognizer: UsPassportRecognizer
+2025-06-25 10:44:22,813 INFO Loaded recognizer: UsSsnRecognizer
+2025-06-25 10:44:22,813 INFO Loaded recognizer: NhsRecognizer
+2025-06-25 10:44:22,813 INFO Loaded recognizer: UkNinoRecognizer
+2025-06-25 10:44:22,813 INFO Loaded recognizer: SgFinRecognizer
+2025-06-25 10:44:22,815 INFO Loaded recognizer: AuAbnRecognizer
+2025-06-25 10:44:22,815 INFO Loaded recognizer: AuAcnRecognizer
+2025-06-25 10:44:22,816 INFO Loaded recognizer: AuTfnRecognizer
+2025-06-25 10:44:22,816 INFO Loaded recognizer: AuMedicareRecognizer
+2025-06-25 10:44:22,817 INFO Loaded recognizer: InPanRecognizer
+2025-06-25 10:44:22,817 INFO Loaded recognizer: InAadhaarRecognizer
+2025-06-25 10:44:22,817 INFO Loaded recognizer: InVehicleRegistrationRecognizer
+2025-06-25 10:44:22,818 INFO Loaded recognizer: InPassportRecognizer
+2025-06-25 10:44:22,818 INFO Loaded recognizer: EsNifRecognizer
+2025-06-25 10:44:22,818 INFO Loaded recognizer: EsNieRecognizer
+2025-06-25 10:44:22,818 INFO Loaded recognizer: ItDriverLicenseRecognizer
+2025-06-25 10:44:22,818 INFO Loaded recognizer: ItFiscalCodeRecognizer
+2025-06-25 10:44:22,818 INFO Loaded recognizer: ItVatCodeRecognizer
+2025-06-25 10:44:22,819 INFO Loaded recognizer: ItIdentityCardRecognizer
+2025-06-25 10:44:22,819 INFO Loaded recognizer: ItPassportRecognizer
+2025-06-25 10:44:22,819 INFO Loaded recognizer: PlPeselRecognizer
+2025-06-25 10:44:22,819 INFO Loaded recognizer: CryptoRecognizer
+2025-06-25 10:44:22,819 INFO Loaded recognizer: DateRecognizer
+2025-06-25 10:44:22,819 INFO Loaded recognizer: EmailRecognizer
+2025-06-25 10:44:22,819 INFO Loaded recognizer: IbanRecognizer
+2025-06-25 10:44:22,820 INFO Loaded recognizer: IpRecognizer
+2025-06-25 10:44:22,820 INFO Loaded recognizer: MedicalLicenseRecognizer
+2025-06-25 10:44:22,820 INFO Loaded recognizer: PhoneRecognizer
+2025-06-25 10:44:22,820 INFO Loaded recognizer: UrlRecognizer
+2025-06-25 10:44:22,820 INFO Loaded recognizer: InVoterRecognizer
+2025-06-25 10:44:22,820 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:22,820 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: pl, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - EsNifRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - EsNieRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItDriverLicenseRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItFiscalCodeRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItVatCodeRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItIdentityCardRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItPassportRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - PlPeselRecognizer supported languages: pl, registry supported languages: en
+2025-06-25 10:44:22,821 INFO Loaded recognizer: SpacyRecognizer
+2025-06-25 10:44:22,825 WARNING model_to_presidio_entity_mapping is missing from configuration, using default
+2025-06-25 10:44:22,825 WARNING low_score_entity_names is missing from configuration, using default
+2025-06-25 10:44:22,825 WARNING labels_to_ignore is missing from configuration, using default
+2025-06-25 10:44:25,752 INFO Created NLP engine: transformers. Loaded models: ['en']
+2025-06-25 10:44:25,752 INFO registry not provided, creating default.
+2025-06-25 10:44:25,784 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:25,785 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:25,785 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:25,785 INFO Loaded recognizer: CreditCardRecognizer
+2025-06-25 10:44:25,785 INFO Loaded recognizer: UsBankRecognizer
+2025-06-25 10:44:25,785 INFO Loaded recognizer: UsLicenseRecognizer
+2025-06-25 10:44:25,786 INFO Loaded recognizer: UsItinRecognizer
+2025-06-25 10:44:25,786 INFO Loaded recognizer: UsPassportRecognizer
+2025-06-25 10:44:25,786 INFO Loaded recognizer: UsSsnRecognizer
+2025-06-25 10:44:25,786 INFO Loaded recognizer: NhsRecognizer
+2025-06-25 10:44:25,786 INFO Loaded recognizer: UkNinoRecognizer
+2025-06-25 10:44:25,786 INFO Loaded recognizer: SgFinRecognizer
+2025-06-25 10:44:25,787 INFO Loaded recognizer: AuAbnRecognizer
+2025-06-25 10:44:25,787 INFO Loaded recognizer: AuAcnRecognizer
+2025-06-25 10:44:25,787 INFO Loaded recognizer: AuTfnRecognizer
+2025-06-25 10:44:25,787 INFO Loaded recognizer: AuMedicareRecognizer
+2025-06-25 10:44:25,787 INFO Loaded recognizer: InPanRecognizer
+2025-06-25 10:44:25,788 INFO Loaded recognizer: InAadhaarRecognizer
+2025-06-25 10:44:25,788 INFO Loaded recognizer: InVehicleRegistrationRecognizer
+2025-06-25 10:44:25,788 INFO Loaded recognizer: InPassportRecognizer
+2025-06-25 10:44:25,788 INFO Loaded recognizer: EsNifRecognizer
+2025-06-25 10:44:25,788 INFO Loaded recognizer: EsNieRecognizer
+2025-06-25 10:44:25,789 INFO Loaded recognizer: ItDriverLicenseRecognizer
+2025-06-25 10:44:25,789 INFO Loaded recognizer: ItFiscalCodeRecognizer
+2025-06-25 10:44:25,789 INFO Loaded recognizer: ItVatCodeRecognizer
+2025-06-25 10:44:25,789 INFO Loaded recognizer: ItIdentityCardRecognizer
+2025-06-25 10:44:25,789 INFO Loaded recognizer: ItPassportRecognizer
+2025-06-25 10:44:25,790 INFO Loaded recognizer: PlPeselRecognizer
+2025-06-25 10:44:25,790 INFO Loaded recognizer: CryptoRecognizer
+2025-06-25 10:44:25,790 INFO Loaded recognizer: DateRecognizer
+2025-06-25 10:44:25,790 INFO Loaded recognizer: EmailRecognizer
+2025-06-25 10:44:25,791 INFO Loaded recognizer: IbanRecognizer
+2025-06-25 10:44:25,791 INFO Loaded recognizer: IpRecognizer
+2025-06-25 10:44:25,791 INFO Loaded recognizer: MedicalLicenseRecognizer
+2025-06-25 10:44:25,791 INFO Loaded recognizer: PhoneRecognizer
+2025-06-25 10:44:25,791 INFO Loaded recognizer: UrlRecognizer
+2025-06-25 10:44:25,791 INFO Loaded recognizer: InVoterRecognizer
+2025-06-25 10:44:25,791 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:25,791 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:25,791 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: pl, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - EsNifRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - EsNieRecognizer supported languages: es, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItDriverLicenseRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItFiscalCodeRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItVatCodeRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItIdentityCardRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItPassportRecognizer supported languages: it, registry supported languages: en
+2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - PlPeselRecognizer supported languages: pl, registry supported languages: en
+2025-06-25 10:44:25,792 INFO Loaded recognizer: TransformersRecognizer
+2025-06-25 10:57:04,281 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\new_fastapi.zip
