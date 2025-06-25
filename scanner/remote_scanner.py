@@ -60,8 +60,8 @@ def _connect_sftp(
 
 
 def _remote_walk(sftp: paramiko.SFTPClient, root: str, extensions: set[str]):
-    """Yield regular file paths under *root* whose extension is in *extensions*."""
-    stack = [root.rstrip("/")]
+    """Yield tuples (remote_path, size_in_bytes) for files with matching extensions."""
+    stack: list[str] = [root.rstrip("/")]
     while stack:
         cur_dir = stack.pop()
         try:
@@ -74,9 +74,9 @@ def _remote_walk(sftp: paramiko.SFTPClient, root: str, extensions: set[str]):
                 elif stat.S_ISREG(mode):
                     _, ext = os.path.splitext(name)
                     if ext.lower() in extensions:
-                        yield remote_path
+                        size = entry.st_size if entry.st_size is not None else 0
+                        yield remote_path, size
         except IOError:
-            # Permission denied or directory vanished – skip.
             continue
 
 
@@ -110,8 +110,8 @@ def remote_scan(
     transformer_model: str = "bert-base-cased",
     report_path: str = "scan_report_remote.csv",
     max_time_per_file: int = 60,
-) -> List[dict]:
-    """Scan *remote_root* on the remote host and return a list of detections."""
+) -> tuple[List[dict], int]:
+    """Scan *remote_root* on the remote host and return (detections, total_bytes)."""
 
     start_overall = time.time()
 
@@ -125,9 +125,10 @@ def remote_scan(
     # 2) Enumerate remote files --------------------------------------------
     extensions = set(EXTRACTORS.keys())
     print("[+] Enumerating remote files…", flush=True)
-    remote_files = list(_remote_walk(sftp, remote_root, extensions))
-    total_files = len(remote_files)
-    print(f"[+] Found {total_files} candidate files on remote host\n", flush=True)
+    remote_items = list(_remote_walk(sftp, remote_root, extensions))
+    total_files = len(remote_items)
+    total_bytes = sum(size for _, size in remote_items)
+    print(f"[+] Found {total_files} files ({total_bytes/1_048_576:.2f} MB) on remote host\n", flush=True)
 
     # 3) Prepare CSV output -------------------------------------------------
     write_header = not os.path.exists(report_path)
@@ -150,8 +151,10 @@ def remote_scan(
 
     # 4) Temporary workspace for downloads ---------------------------------
     detections: List[dict] = []
+    processed_bytes = 0
+
     with tempfile.TemporaryDirectory(prefix="remote_scan_") as tmp_dir:
-        for rpath in tqdm(remote_files, desc="Scanning remote files", unit="file"):
+        for rpath, rsize in tqdm(remote_items, desc="Scanning remote files", unit="file"):
             try:
                 local_path = _download_temp(sftp, rpath, tmp_dir)
             except Exception as exc:
@@ -215,13 +218,15 @@ def remote_scan(
             except OSError:
                 pass
 
+            processed_bytes += rsize
+
     report_fh.close()
     ssh.close()
 
     elapsed = time.time() - start_overall
     print(f"\n[+] Remote scan complete in {elapsed:.1f}s – total matches: {len(detections)}")
 
-    return detections
+    return detections, total_bytes
 
 
 # ---------------------------------------------------------------------------

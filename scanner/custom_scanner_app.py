@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 import csv
 from multiprocessing import Pool
-# from remote_scanner import remote_scan
+from remote_scanner import remote_scan
 
 from datetime import datetime, timezone
 from custom_scanner import (
@@ -78,9 +78,21 @@ with st.sidebar:
         help="Characters around match to consider for context"
     )
     
-    # Force engine to spacy for lightweight local testing
-    engine_type = "spacy"
-    transformer_model = None  # Not used in spacy mode
+    # Model selection
+    engine_type = st.radio(
+        "NLP engine",
+        options=["spacy", "transformer"],
+        index=0,
+        help="Underlying NLP engine used by Presidio for entity detection",
+    )
+
+    transformer_model = None
+    if engine_type == "transformer":
+        transformer_model = st.text_input(
+            "Transformer model (🤗 HuggingFace)",
+            value="bert-base-cased",
+            help="Model identifier to load when using transformer engine",
+        )
 
     # Advanced settings
     with st.expander("Advanced Settings"):
@@ -114,11 +126,16 @@ with st.sidebar:
             help="Save progress to resume interrupted scans"
         )
 
-    # For now, only Local scan mode is enabled
-    scan_mode = "Local"
+    # Choose scan mode
+    scan_mode = st.radio(
+        "Scan mode",
+        options=["Local", "Remote"],
+        index=0,
+        help="Select 'Local' to scan a directory on this machine or 'Remote' to connect over SSH/SFTP and scan a folder on another host.",
+    )
 
 # Main input – differ for local vs. remote
-if True:  # Local scan only
+if scan_mode == "Local":
     folder_path = st.text_input(
         "📁 Enter local folder path to scan:",
         placeholder="C:/path/to/folder",
@@ -130,12 +147,98 @@ if True:  # Local scan only
     password: str | None = ""
     key_path: str | None = None
     remote_dir: str = ""
+else:
+    host = st.text_input("🔗 Remote host (IP / DNS)")
+    port = st.number_input("SSH port", min_value=1, max_value=65535, value=22, step=1)
+    username = st.text_input("👤 Username")
+    auth_method = st.radio("Authentication method", ["Password", "SSH Key"])
+    if auth_method == "Password":
+        password = st.text_input("🔑 Password", type="password")
+        key_path = None
+    else:
+        key_path = st.text_input("🔑 Private key file", placeholder="~/.ssh/id_rsa")
+        password = None
+    remote_dir = st.text_input("📂 Remote path to scan:", placeholder="/path/on/remote")
+    folder_path = None  # not used in remote mode
 
 if st.button("🚀 Start Scan", type="primary"):
     # ------------------------------------------------------------
+    # REMOTE SCAN MODE
+    # ------------------------------------------------------------
+    if scan_mode == "Remote":
+        if not host or not username or not remote_dir:
+            st.error("❌ Please fill the remote host, username, and directory path.")
+        else:
+            with st.spinner("🔗 Connecting and scanning remote server …"):
+                start_time_total = time.time()
+                report_rows, total_bytes = remote_scan(
+                    host=host,
+                    port=int(port),
+                    username=username,
+                    password=password,
+                    key_file=key_path,
+                    remote_root=remote_dir,
+                    base_threshold=base_threshold,
+                    final_threshold=final_threshold,
+                    w_context=w_context,
+                    w_pattern=w_pattern,
+                    window_size=window_size,
+                    engine_type=engine_type,
+                    transformer_model=transformer_model or "bert-base-cased",
+                    report_path="scan_report_remote.csv",
+                    max_time_per_file=max_time_per_file,
+                )
+                elapsed_total = time.time() - start_time_total
+
+            # Display results (reuse same styling)
+            if report_rows:
+                df = pd.DataFrame(report_rows)
+                for col in ["base_score", "context_score", "final_score"]:
+                    df[col] = pd.to_numeric(df[col], errors="coerce")
+
+                df["severity"] = df["final_score"].apply(
+                    lambda x: "High" if x >= 0.7 else "Medium" if x >= 0.4 else "Low"
+                )
+
+                st.success(
+                    f"✅ Remote scan complete in {elapsed_total:.1f} seconds. "
+                    f"Found {len(df)} matches across {df['file'].nunique()} files."
+                )
+
+                col1, col2, col3, col4 = st.columns(4)
+                col1.metric("Total matches", len(df))
+                col2.metric("Files with matches", int(df["file"].nunique()))
+                col3.metric("Data scanned", f"{total_bytes/1_048_576:.2f} MB")
+                col4.metric("Avg. confidence", f"{df['final_score'].mean():.1%}")
+
+                def highlight_scores(row):
+                    styles = [""] * len(row)
+                    if row["final_score"] >= 0.7:
+                        styles[-3:] = ["background-color: #4CAF50; color: white"] * 3
+                    elif row["final_score"] < 0.4:
+                        styles[-3:] = ["background-color: #F44336; color: white"] * 3
+                    return styles
+
+                st.dataframe(
+                    df.style.apply(highlight_scores, axis=1),
+                    use_container_width=True,
+                    height=600,
+                )
+
+                csv_data = df.to_csv(index=False).encode("utf-8")
+                st.download_button(
+                    "⬇️ Download Full Report",
+                    data=csv_data,
+                    file_name="remote_cc_report.csv",
+                    mime="text/csv",
+                )
+            else:
+                st.info("🎉 Remote scan complete. No credit card matches found above the threshold.")
+
+    # ------------------------------------------------------------
     # LOCAL SCAN MODE (existing logic, unchanged)
     # ------------------------------------------------------------
-    if not folder_path or not os.path.exists(folder_path) or not os.path.isdir(folder_path):
+    elif not folder_path or not os.path.exists(folder_path) or not os.path.isdir(folder_path):
         st.error("❌ Please enter a valid directory path.")
     else:
         # Initialize scanning
@@ -149,11 +252,16 @@ if st.button("🚀 Start Scan", type="primary"):
         files = list(gather_all_files_scandir(folder_path, extensions))
         total_files = len(files)
         
+        # Compute total size of files
+        path_sizes = {p: os.path.getsize(p) if os.path.exists(p) else 0 for p in files}
+        total_bytes = sum(path_sizes.values())
+        
         # Display stats
-        col1, col2, col3 = st.columns(3)
-        col1.metric("Total files to scan", total_files)
-        col2.metric("Supported extensions", ", ".join(extensions))
-        col3.metric("Workers", max_workers)
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("Total files", total_files)
+        col2.metric("Workers", max_workers)
+        col3.metric("Data size", f"{total_bytes/1_048_576:.2f} MB")
+        col4.metric("Supported ext", ", ".join(sorted(list(extensions))[:5]) + ("…" if len(extensions) > 5 else ""))
         
         # Initialize report
         write_header = not os.path.exists(REPORT_FILE)
@@ -173,6 +281,7 @@ if st.button("🚀 Start Scan", type="primary"):
         
         # Process files in batches
         processed_count = 0
+        processed_bytes = 0
         report_rows = []
         
         with st.spinner("Scanning in progress..."):
@@ -186,12 +295,14 @@ if st.button("🚀 Start Scan", type="primary"):
                         continue
                 
                 # Update progress
+                processed_bytes += sum(path_sizes.get(p, 0) for p in batch)
                 progress = min((i + len(batch)) / total_files, 1.0)
                 progress_bar.progress(progress)
                 elapsed = time.time() - start_time_total
                 remaining = (elapsed / (i + 1)) * (total_files - i) if i > 0 else 0
                 status_text.info(
-                    f"Processed {i}/{total_files} files ({progress:.1%}) - "
+                    f"Processed {i}/{total_files} files ({progress:.1%}) | "
+                    f"Data: {processed_bytes/1_048_576:.2f}/{total_bytes/1_048_576:.2f} MB | "
                     f"Elapsed: {elapsed:.1f}s - Remaining: ~{remaining:.1f}s"
                 )
                 
@@ -262,7 +373,7 @@ if st.button("🚀 Start Scan", type="primary"):
             
             # Summary metrics
             col1, col2, col3 = st.columns(3)
-            col1.metric("Total matches", int(len(df)))
+            col1.metric("Total matches", len(df))
             col2.metric("Files with matches", int(df['file'].nunique()))
             col3.metric("Avg. confidence", f"{df['final_score'].mean():.1%}")
             
