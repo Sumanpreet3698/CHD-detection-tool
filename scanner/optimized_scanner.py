@@ -358,7 +358,7 @@ def main():
                 chunksize = max(1, len(batch) // (WORKERS * 4)) if WORKERS > 0 else 1
                 for path, hits in pool.imap_unordered(process_file_wrapper, args_iter, chunksize):
                     # Write hits if any
-                    timestamp = datetime.now(timezone.utc).isoformat()
+                    timestamp = datetime.now().astimezone().isoformat()
                     for hit in hits:
                         writer.writerow([timestamp, *hit])
                     processed_count += 1

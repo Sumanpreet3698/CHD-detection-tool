@@ -323,7 +323,7 @@ if st.button("🚀 Start Scan", type="primary"):
                 
                 with Pool(processes=max_workers, initializer=init_worker, maxtasksperchild=MAXTASKSPERCHILD) as pool:
                     for path, hits in pool.imap_unordered(process_file_wrapper, args_iter):
-                        timestamp = datetime.now(timezone.utc).isoformat()
+                        timestamp = datetime.now().astimezone().isoformat()
                         for hit in hits:
                             # hit: (path, label, start, end, snippet, base_s, ctx_s, final_s)
                             row = [timestamp] + list(hit)

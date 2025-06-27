@@ -1,269 +1,55 @@
-2025-06-25 10:36:42,193 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\new_fastapi.zip
-2025-06-25 10:44:08,381 INFO nlp_engine not provided, creating default.
-2025-06-25 10:44:16,697 INFO Created NLP engine: spacy. Loaded models: ['en']
-2025-06-25 10:44:16,710 INFO registry not provided, creating default.
-2025-06-25 10:44:16,778 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:16,880 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:16,880 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:16,881 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:16,882 INFO Loaded recognizer: UsBankRecognizer
-2025-06-25 10:44:16,883 INFO Loaded recognizer: UsLicenseRecognizer
-2025-06-25 10:44:16,883 INFO Loaded recognizer: UsItinRecognizer
-2025-06-25 10:44:16,884 INFO Loaded recognizer: UsPassportRecognizer
-2025-06-25 10:44:16,886 INFO Loaded recognizer: UsSsnRecognizer
-2025-06-25 10:44:16,888 INFO Loaded recognizer: NhsRecognizer
-2025-06-25 10:44:16,889 INFO Loaded recognizer: UkNinoRecognizer
-2025-06-25 10:44:16,890 INFO Loaded recognizer: SgFinRecognizer
-2025-06-25 10:44:16,890 INFO Loaded recognizer: AuAbnRecognizer
-2025-06-25 10:44:16,891 INFO Loaded recognizer: AuAcnRecognizer
-2025-06-25 10:44:16,892 INFO Loaded recognizer: AuTfnRecognizer
-2025-06-25 10:44:16,892 INFO Loaded recognizer: AuMedicareRecognizer
-2025-06-25 10:44:16,892 INFO Loaded recognizer: InPanRecognizer
-2025-06-25 10:44:16,894 INFO Loaded recognizer: InAadhaarRecognizer
-2025-06-25 10:44:16,896 INFO Loaded recognizer: InVehicleRegistrationRecognizer
-2025-06-25 10:44:16,897 INFO Loaded recognizer: InPassportRecognizer
-2025-06-25 10:44:16,897 INFO Loaded recognizer: EsNifRecognizer
-2025-06-25 10:44:16,899 INFO Loaded recognizer: EsNieRecognizer
-2025-06-25 10:44:16,899 INFO Loaded recognizer: ItDriverLicenseRecognizer
-2025-06-25 10:44:16,900 INFO Loaded recognizer: ItFiscalCodeRecognizer
-2025-06-25 10:44:16,900 INFO Loaded recognizer: ItVatCodeRecognizer
-2025-06-25 10:44:16,901 INFO Loaded recognizer: ItIdentityCardRecognizer
-2025-06-25 10:44:16,904 INFO Loaded recognizer: ItPassportRecognizer
-2025-06-25 10:44:16,905 INFO Loaded recognizer: PlPeselRecognizer
-2025-06-25 10:44:16,907 INFO Loaded recognizer: CryptoRecognizer
-2025-06-25 10:44:16,907 INFO Loaded recognizer: DateRecognizer
-2025-06-25 10:44:16,908 INFO Loaded recognizer: EmailRecognizer
-2025-06-25 10:44:16,908 INFO Loaded recognizer: IbanRecognizer
-2025-06-25 10:44:16,909 INFO Loaded recognizer: IpRecognizer
-2025-06-25 10:44:16,909 INFO Loaded recognizer: MedicalLicenseRecognizer
-2025-06-25 10:44:16,909 INFO Loaded recognizer: PhoneRecognizer
-2025-06-25 10:44:16,910 INFO Loaded recognizer: UrlRecognizer
-2025-06-25 10:44:16,910 INFO Loaded recognizer: InVoterRecognizer
-2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: pl, registry supported languages: en
-2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - EsNifRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:16,912 WARNING Recognizer not added to registry because language is not supported by registry - EsNieRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItDriverLicenseRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItFiscalCodeRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItVatCodeRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItIdentityCardRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - ItPassportRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:16,913 WARNING Recognizer not added to registry because language is not supported by registry - PlPeselRecognizer supported languages: pl, registry supported languages: en
-2025-06-25 10:44:16,915 INFO Loaded recognizer: SpacyRecognizer
-2025-06-25 10:44:17,358 WARNING model_to_presidio_entity_mapping is missing from configuration, using default
-2025-06-25 10:44:17,358 WARNING low_score_entity_names is missing from configuration, using default
-2025-06-25 10:44:17,358 WARNING labels_to_ignore is missing from configuration, using default
-2025-06-25 10:44:22,789 INFO Created NLP engine: spacy. Loaded models: ['en']
-2025-06-25 10:44:22,790 INFO registry not provided, creating default.
-2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:22,812 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:22,812 INFO Loaded recognizer: UsBankRecognizer
-2025-06-25 10:44:22,813 INFO Loaded recognizer: UsLicenseRecognizer
-2025-06-25 10:44:22,813 INFO Loaded recognizer: UsItinRecognizer
-2025-06-25 10:44:22,813 INFO Loaded recognizer: UsPassportRecognizer
-2025-06-25 10:44:22,813 INFO Loaded recognizer: UsSsnRecognizer
-2025-06-25 10:44:22,813 INFO Loaded recognizer: NhsRecognizer
-2025-06-25 10:44:22,813 INFO Loaded recognizer: UkNinoRecognizer
-2025-06-25 10:44:22,813 INFO Loaded recognizer: SgFinRecognizer
-2025-06-25 10:44:22,815 INFO Loaded recognizer: AuAbnRecognizer
-2025-06-25 10:44:22,815 INFO Loaded recognizer: AuAcnRecognizer
-2025-06-25 10:44:22,816 INFO Loaded recognizer: AuTfnRecognizer
-2025-06-25 10:44:22,816 INFO Loaded recognizer: AuMedicareRecognizer
-2025-06-25 10:44:22,817 INFO Loaded recognizer: InPanRecognizer
-2025-06-25 10:44:22,817 INFO Loaded recognizer: InAadhaarRecognizer
-2025-06-25 10:44:22,817 INFO Loaded recognizer: InVehicleRegistrationRecognizer
-2025-06-25 10:44:22,818 INFO Loaded recognizer: InPassportRecognizer
-2025-06-25 10:44:22,818 INFO Loaded recognizer: EsNifRecognizer
-2025-06-25 10:44:22,818 INFO Loaded recognizer: EsNieRecognizer
-2025-06-25 10:44:22,818 INFO Loaded recognizer: ItDriverLicenseRecognizer
-2025-06-25 10:44:22,818 INFO Loaded recognizer: ItFiscalCodeRecognizer
-2025-06-25 10:44:22,818 INFO Loaded recognizer: ItVatCodeRecognizer
-2025-06-25 10:44:22,819 INFO Loaded recognizer: ItIdentityCardRecognizer
-2025-06-25 10:44:22,819 INFO Loaded recognizer: ItPassportRecognizer
-2025-06-25 10:44:22,819 INFO Loaded recognizer: PlPeselRecognizer
-2025-06-25 10:44:22,819 INFO Loaded recognizer: CryptoRecognizer
-2025-06-25 10:44:22,819 INFO Loaded recognizer: DateRecognizer
-2025-06-25 10:44:22,819 INFO Loaded recognizer: EmailRecognizer
-2025-06-25 10:44:22,819 INFO Loaded recognizer: IbanRecognizer
-2025-06-25 10:44:22,820 INFO Loaded recognizer: IpRecognizer
-2025-06-25 10:44:22,820 INFO Loaded recognizer: MedicalLicenseRecognizer
-2025-06-25 10:44:22,820 INFO Loaded recognizer: PhoneRecognizer
-2025-06-25 10:44:22,820 INFO Loaded recognizer: UrlRecognizer
-2025-06-25 10:44:22,820 INFO Loaded recognizer: InVoterRecognizer
-2025-06-25 10:44:22,820 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:22,820 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: pl, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - EsNifRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - EsNieRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItDriverLicenseRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItFiscalCodeRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItVatCodeRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItIdentityCardRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - ItPassportRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:22,821 WARNING Recognizer not added to registry because language is not supported by registry - PlPeselRecognizer supported languages: pl, registry supported languages: en
-2025-06-25 10:44:22,821 INFO Loaded recognizer: SpacyRecognizer
-2025-06-25 10:44:22,825 WARNING model_to_presidio_entity_mapping is missing from configuration, using default
-2025-06-25 10:44:22,825 WARNING low_score_entity_names is missing from configuration, using default
-2025-06-25 10:44:22,825 WARNING labels_to_ignore is missing from configuration, using default
-2025-06-25 10:44:25,752 INFO Created NLP engine: transformers. Loaded models: ['en']
-2025-06-25 10:44:25,752 INFO registry not provided, creating default.
-2025-06-25 10:44:25,784 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:25,785 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:25,785 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:25,785 INFO Loaded recognizer: CreditCardRecognizer
-2025-06-25 10:44:25,785 INFO Loaded recognizer: UsBankRecognizer
-2025-06-25 10:44:25,785 INFO Loaded recognizer: UsLicenseRecognizer
-2025-06-25 10:44:25,786 INFO Loaded recognizer: UsItinRecognizer
-2025-06-25 10:44:25,786 INFO Loaded recognizer: UsPassportRecognizer
-2025-06-25 10:44:25,786 INFO Loaded recognizer: UsSsnRecognizer
-2025-06-25 10:44:25,786 INFO Loaded recognizer: NhsRecognizer
-2025-06-25 10:44:25,786 INFO Loaded recognizer: UkNinoRecognizer
-2025-06-25 10:44:25,786 INFO Loaded recognizer: SgFinRecognizer
-2025-06-25 10:44:25,787 INFO Loaded recognizer: AuAbnRecognizer
-2025-06-25 10:44:25,787 INFO Loaded recognizer: AuAcnRecognizer
-2025-06-25 10:44:25,787 INFO Loaded recognizer: AuTfnRecognizer
-2025-06-25 10:44:25,787 INFO Loaded recognizer: AuMedicareRecognizer
-2025-06-25 10:44:25,787 INFO Loaded recognizer: InPanRecognizer
-2025-06-25 10:44:25,788 INFO Loaded recognizer: InAadhaarRecognizer
-2025-06-25 10:44:25,788 INFO Loaded recognizer: InVehicleRegistrationRecognizer
-2025-06-25 10:44:25,788 INFO Loaded recognizer: InPassportRecognizer
-2025-06-25 10:44:25,788 INFO Loaded recognizer: EsNifRecognizer
-2025-06-25 10:44:25,788 INFO Loaded recognizer: EsNieRecognizer
-2025-06-25 10:44:25,789 INFO Loaded recognizer: ItDriverLicenseRecognizer
-2025-06-25 10:44:25,789 INFO Loaded recognizer: ItFiscalCodeRecognizer
-2025-06-25 10:44:25,789 INFO Loaded recognizer: ItVatCodeRecognizer
-2025-06-25 10:44:25,789 INFO Loaded recognizer: ItIdentityCardRecognizer
-2025-06-25 10:44:25,789 INFO Loaded recognizer: ItPassportRecognizer
-2025-06-25 10:44:25,790 INFO Loaded recognizer: PlPeselRecognizer
-2025-06-25 10:44:25,790 INFO Loaded recognizer: CryptoRecognizer
-2025-06-25 10:44:25,790 INFO Loaded recognizer: DateRecognizer
-2025-06-25 10:44:25,790 INFO Loaded recognizer: EmailRecognizer
-2025-06-25 10:44:25,791 INFO Loaded recognizer: IbanRecognizer
-2025-06-25 10:44:25,791 INFO Loaded recognizer: IpRecognizer
-2025-06-25 10:44:25,791 INFO Loaded recognizer: MedicalLicenseRecognizer
-2025-06-25 10:44:25,791 INFO Loaded recognizer: PhoneRecognizer
-2025-06-25 10:44:25,791 INFO Loaded recognizer: UrlRecognizer
-2025-06-25 10:44:25,791 INFO Loaded recognizer: InVoterRecognizer
-2025-06-25 10:44:25,791 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:25,791 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:25,791 WARNING Recognizer not added to registry because language is not supported by registry - CreditCardRecognizer supported languages: pl, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - EsNifRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - EsNieRecognizer supported languages: es, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItDriverLicenseRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItFiscalCodeRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItVatCodeRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItIdentityCardRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - ItPassportRecognizer supported languages: it, registry supported languages: en
-2025-06-25 10:44:25,792 WARNING Recognizer not added to registry because language is not supported by registry - PlPeselRecognizer supported languages: pl, registry supported languages: en
-2025-06-25 10:44:25,792 INFO Loaded recognizer: TransformersRecognizer
-2025-06-25 10:57:04,281 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\new_fastapi.zip
-2025-06-25 11:20:12,655 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\Multimodal_RAG\Examples\digit-recognizer\test.csv
-2025-06-25 11:20:13,562 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\Multimodal_RAG\Examples\digit-recognizer\train.csv
-2025-06-25 11:29:01,013 WARNING Failed to open .xls file C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-server\tika-server-standard\target\test-classes\test-documents\password.xls with xlrd: Workbook is encrypted
-2025-06-25 11:29:01,803 WARNING Failed to open .xls file C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-server\tika-server-standard\src\test\resources\test-documents\password.xls with xlrd: Workbook is encrypted
-2025-06-25 11:39:22,195 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\target\test-classes\test-documents\protect.xlsx: File is not a zip file
-2025-06-25 11:39:22,262 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\target\test-classes\test-documents\protectedFile.xlsx: File is not a zip file
-2025-06-25 11:39:23,221 WARNING Encoding property not found. Defaulting to ISO-8859-15.
-2025-06-25 11:39:23,425 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:23,425 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:23,425 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:23,425 INFO Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:23,425 INFO Stream "__recip_version1.0_#00000000/__substg1.0_3003001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:23,425 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:28,386 WARNING Failed to open .xls file C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\target\test-classes\test-documents\testEXCEL_protected_passtika.xls with xlrd: Workbook is encrypted
-2025-06-25 11:39:28,477 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\target\test-classes\test-documents\testEXCEL_protected_passtika.xlsx: File is not a zip file
-2025-06-25 11:39:29,147 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\target\test-classes\test-documents\testEXCEL_protected_passtika_2.xlsx: File is not a zip file
-2025-06-25 11:39:30,954 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:30,954 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:30,954 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:30,954 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:30,995 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:30,995 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:30,995 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:30,995 INFO Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:30,995 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,084 INFO Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,084 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:31,084 WARNING Encoding property not found. Defaulting to ISO-8859-15.
-2025-06-25 11:39:31,084 INFO Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,238 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,238 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:31,238 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,238 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,339 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,339 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:31,339 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,339 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,377 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,377 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:31,377 INFO Stream "__substg1.0_0C1A001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,377 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,377 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,434 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,434 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:39:31,434 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:39:31,434 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:40:58,983 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\src\test\resources\test-documents\protect.xlsx: File is not a zip file
-2025-06-25 11:40:59,053 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\src\test\resources\test-documents\protectedFile.xlsx: File is not a zip file
-2025-06-25 11:40:59,627 WARNING Encoding property not found. Defaulting to ISO-8859-15.
-2025-06-25 11:40:59,896 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:40:59,897 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:40:59,902 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:40:59,904 INFO Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:40:59,905 INFO Stream "__recip_version1.0_#00000000/__substg1.0_3003001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:40:59,906 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:33,847 WARNING Failed to open .xls file C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\src\test\resources\test-documents\testEXCEL_protected_passtika.xls with xlrd: Workbook is encrypted
-2025-06-25 11:41:33,926 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\src\test\resources\test-documents\testEXCEL_protected_passtika.xlsx: File is not a zip file
-2025-06-25 11:41:34,581 WARNING Failed to open XLSX C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-parsers\tika-parsers-standard\tika-parsers-standard-modules\tika-parser-microsoft-module\src\test\resources\test-documents\testEXCEL_protected_passtika_2.xlsx: File is not a zip file
-2025-06-25 11:41:37,288 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,288 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:41:37,288 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,288 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,345 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,345 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:41:37,345 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,345 INFO Stream "__recip_version1.0_#00000000/__substg1.0_39FE001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,361 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,484 INFO Stream "__substg1.0_007D001E" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,484 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:41:37,484 WARNING Encoding property not found. Defaulting to ISO-8859-15.
-2025-06-25 11:41:37,495 INFO Stream "__substg1.0_5D01001E" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,684 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,684 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:41:37,684 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,684 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,806 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,806 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:41:37,822 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,822 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,879 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,879 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:41:37,879 INFO Stream "__substg1.0_0C1A001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,879 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,879 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,940 INFO Stream "__substg1.0_007D001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,940 INFO Header is empty or was not found. Header will be generated from other streams.
-2025-06-25 11:41:37,940 INFO Stream "__substg1.0_5D01001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:41:37,940 INFO Stream "__substg1.0_1035001F" was requested but could not be found. Returning `None`.
-2025-06-25 11:44:46,978 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\target\test-classes\test-dirs\raw_input\file1.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\target\\test-classes\\test-dirs\\raw_input\\file1.pdf'.
-2025-06-25 11:44:46,978 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\target\test-classes\test-dirs\raw_input\file4_emptyB.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\target\\test-classes\\test-dirs\\raw_input\\file4_emptyB.pdf'.
-2025-06-25 11:44:46,990 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\target\test-classes\test-dirs\raw_input\file5_emptyA.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\target\\test-classes\\test-dirs\\raw_input\\file5_emptyA.pdf'.
-2025-06-25 11:44:47,001 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\target\test-classes\test-dirs\raw_input\file6_accessEx.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\target\\test-classes\\test-dirs\\raw_input\\file6_accessEx.pdf'.
-2025-06-25 11:44:47,001 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\target\test-classes\test-dirs\raw_input\file7_badJson.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\target\\test-classes\\test-dirs\\raw_input\\file7_badJson.pdf'.
-2025-06-25 11:44:47,008 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\target\test-classes\test-dirs\raw_input\file8_IOEx.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\target\\test-classes\\test-dirs\\raw_input\\file8_IOEx.pdf'.
-2025-06-25 11:44:49,913 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\src\test\resources\test-dirs\raw_input\file1.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\src\\test\\resources\\test-dirs\\raw_input\\file1.pdf'.
-2025-06-25 11:44:49,944 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\src\test\resources\test-dirs\raw_input\file4_emptyB.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\src\\test\\resources\\test-dirs\\raw_input\\file4_emptyB.pdf'.
-2025-06-25 11:44:49,950 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\src\test\resources\test-dirs\raw_input\file5_emptyA.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\src\\test\\resources\\test-dirs\\raw_input\\file5_emptyA.pdf'.
-2025-06-25 11:44:49,960 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\src\test\resources\test-dirs\raw_input\file6_accessEx.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\src\\test\\resources\\test-dirs\\raw_input\\file6_accessEx.pdf'.
-2025-06-25 11:44:49,961 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\src\test\resources\test-dirs\raw_input\file7_badJson.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\src\\test\\resources\\test-dirs\\raw_input\\file7_badJson.pdf'.
-2025-06-25 11:44:49,975 WARNING Cannot open PDF C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\forensic_scanner\tika\tika-eval\tika-eval-app\src\test\resources\test-dirs\raw_input\file8_IOEx.pdf: Failed to open file 'C:\\Users\\nikit\\OneDrive - Panacea InfoSec Pvt. Ltd\\Panacea_Infosec\\forensic_scanner\\tika\\tika-eval\\tika-eval-app\\src\\test\\resources\\test-dirs\\raw_input\\file8_IOEx.pdf'.
-2025-06-25 12:01:32,745 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\document_fraud_dection\merged_datasets_csv\train_dataset.csv
-2025-06-25 12:01:45,684 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\document_fraud_dection\findit2\findit2.zip (673967146 bytes)
-2025-06-25 12:31:39,647 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\Custom_CheXagent_Classifier\cxr_multilabel_checkpoint.zip (5726582407 bytes)
-2025-06-25 12:31:39,678 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\Custom_CheXagent_Classifier\dataset.zip (42963473276 bytes)
-2025-06-25 12:32:40,333 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\Custom_CheXagent_Classifier\train_df.csv
-2025-06-25 12:32:40,489 WARNING Timeout processing file: C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\Custom_CheXagent_Classifier\nih_binary_labels.csv
-2025-06-25 12:37:01,712 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive - Panacea InfoSec Pvt. Ltd\Panacea_Infosec\ChestXrayClassification\src\model_files\checkpoint_finetuned_MedVit_100epoch.zip (215311912 bytes)
+2025-06-27 12:06:35,410 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter2_result.csv
+2025-06-27 12:06:35,586 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter3_result_final.csv
+2025-06-27 12:07:35,933 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter3_result_outliers.csv
+2025-06-27 12:07:37,578 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter4_result.csv
+2025-06-27 12:08:36,708 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\result_files\chapter5_result.csv
+2025-06-27 12:08:38,455 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter2_result.csv
+2025-06-27 12:09:38,797 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter3_result_final.csv
+2025-06-27 12:09:39,635 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter3_result_outliers.csv
+2025-06-27 12:10:39,411 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter4_result.csv
+2025-06-27 12:10:40,387 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\intermediate_datafiles\chapter5_result.csv
+2025-06-27 12:12:01,944 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Accelerometer.csv
+2025-06-27 12:12:28,787 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Gravity.csv
+2025-06-27 12:13:03,951 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Gyroscope.csv
+2025-06-27 12:14:22,836 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\new_data\Magnetometer.csv
+2025-06-27 12:14:53,684 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\accelerometer_phone.csv
+2025-06-27 12:15:23,790 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\accelerometer_smartwatch.csv
+2025-06-27 12:16:00,125 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\gyroscope_phone.csv
+2025-06-27 12:16:24,029 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\gyroscope_smartwatch.csv
+2025-06-27 12:17:24,330 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\light_phone.csv
+2025-06-27 12:17:27,334 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\magnetometer_phone.csv
+2025-06-27 12:18:24,903 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\magnetometer_smartwatch.csv
+2025-06-27 12:18:28,683 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\pressure_phone.csv
+2025-06-27 12:18:39,324 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\Literature_list.zip (139308271 bytes)
+2025-06-27 12:19:28,870 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\ML4QS\Python3Code\datasets\crowdsignals\csv-participant-one\wlan_phone.csv
+2025-06-27 12:19:49,220 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\merged_interaction_file_updated(AutoRecovered).csv
+2025-06-27 12:20:30,198 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\merged_interaction_file_updated.csv
+2025-06-27 12:25:26,790 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\my_code\navigation_robot_code\interaction_20230614104011.csv
+2025-06-27 12:26:31,704 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\my_code\navigation_robot_code\interaction_20230614104111.csv
+2025-06-27 12:29:13,862 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\Literature_list\HRI Suvey Articles\Human_robot_interaction_book.pdf
+2025-06-27 12:29:38,754 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\Literature_list\HRI Suvey Articles\Social_Intelligence_and_nonverbal_communication_book_chapter1-8.pdf
+2025-06-27 12:31:41,047 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Master Thesis Project\Literature_list\Evaluation Metrics\Human-Robot Interaction Evaluation Methods and Their Standardization.pdf
+2025-06-27 12:34:57,775 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\Literature_list.zip (139308271 bytes)
+2025-06-27 12:36:10,850 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\merged_interaction_file_updated(AutoRecovered).csv
+2025-06-27 12:36:11,330 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\merged_interaction_file_updated.csv
+2025-06-27 12:41:12,559 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\my_code\navigation_robot_code\interaction_20230614104111.csv
+2025-06-27 12:45:41,186 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\Literature_list\HRI Suvey Articles\Human_robot_interaction_book.pdf
+2025-06-27 12:46:19,348 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\Literature_list\HRI Suvey Articles\Social_Intelligence_and_nonverbal_communication_book_chapter1-8.pdf
+2025-06-27 12:46:41,263 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\Literature_list\HRI Suvey Articles\Social_Robots_book.pdf
+2025-06-27 12:48:13,648 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Master Thesis Project\Literature_list\Evaluation Metrics\Human-Robot Interaction Evaluation Methods and Their Standardization.pdf
+2025-06-27 12:48:13,981 WARNING High memory usage: 85.81%.
+2025-06-27 12:48:13,999 INFO Reducing batch size from 500 to 250 due to memory pressure
+2025-06-27 12:54:39,715 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\RLbook2020.pdf
+2025-06-27 12:56:05,140 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\worksheets\ansur\ANSUR II MALE Public.csv
+2025-06-27 12:56:05,588 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\worksheets\ansur\ANSUR II FEMALE Public.csv
+2025-06-27 12:56:49,270 WARNING High memory usage: 83.77%.
+2025-06-27 12:56:49,277 INFO Reducing batch size from 250 to 125 due to memory pressure
+2025-06-27 12:57:58,337 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\Assignments\Assignment_2\Assigment2_Code.zip (364275586 bytes)
+2025-06-27 12:58:01,290 INFO Skipping large file (no CC-like pattern): C:\Users\nikit\OneDrive\Desktop\Course_Materials\Deep Learning\Assignments\Assignment_2\nti440_Assignment2.zip (365026385 bytes)
+2025-06-27 13:00:56,011 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Applied Text Mining\Assignments\Applied-text-mining-AI4\preprocessing-feature-extraction\data\SEM-2012-SharedTask-CD-SCO-training-simple.v2.txt
+2025-06-27 13:01:00,017 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\An Introduction to Statistical Learning  with Applications in R.pdf
+2025-06-27 13:01:57,058 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\Deep Learning (2017, MIT).pdf
+2025-06-27 13:02:00,170 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\mml-book.pdf
+2025-06-27 13:03:05,949 WARNING Timeout processing file: C:\Users\nikit\OneDrive\Desktop\Course_Materials\Advanced ML\The Elements of Statistical Learning, Data Mining, Inference, and Prediction.pdf
+2025-06-27 13:04:11,870 WARNING High memory usage: 80.19%.
+2025-06-27 13:04:11,883 INFO Reducing batch size from 125 to 100 due to memory pressure

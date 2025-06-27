@@ -187,7 +187,7 @@ def remote_scan(
                 ) = hit
 
                 row = [
-                    datetime.now(timezone.utc).isoformat(),
+                    datetime.now().astimezone().isoformat(),
                     rpath,
                     label,
                     start_idx,

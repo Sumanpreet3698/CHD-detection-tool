@@ -442,7 +442,8 @@ def main():
                 # Determine an appropriate chunksize
                 chunksize = max(1, len(batch) // (WORKERS * 4)) if WORKERS > 0 else 1
                 for path, hits in pool.imap_unordered(process_file_wrapper, args_iter, chunksize):
-                    timestamp = datetime.now(timezone.utc).isoformat()
+                    # Use local timezone-aware timestamp instead of UTC
+                    timestamp = datetime.now().astimezone().isoformat()
                     # Write hits if any
                     for hit in hits:
                         # hit: (path, label, start, end, snippet, base_score, context_score, final_score)
